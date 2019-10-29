@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test name="Default test(failed)">
+  <test verbose="2" name="Default test">
     <classes>
-      <class name="sprintaiva.Api_validation">
-        <methods>
-          <include name="openSprint1"/>
-          <include name="setUp"/>
-        </methods>
-      </class> <!-- sprintaiva.Api_validation -->
+      <class name="com.sprint.aiva.api.main.TestDataValidation"/>
     </classes>
-  </test> <!-- Default test(failed) -->
+  </test> <!-- Default test -->
 </suite> <!-- Failed suite [Default suite] -->
