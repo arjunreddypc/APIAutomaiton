@@ -24,6 +24,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.JsonArray;
@@ -231,7 +232,7 @@ public class UtilityService {
 
 	}
 
-	public static void invokeServiceUC54() {
+	public static void invokeServiceUC54() throws JSONException {
 		
 		try {
 			SSLContext ctx = SSLContext.getInstance("TLS");
@@ -287,6 +288,7 @@ public class UtilityService {
 								System.err.println("Method failed: " + method.getStatusLine());
 							}
 							String response = method.getResponseBodyAsString();					
+							if(!response.contains("404")) {
 							JSONArray array = new JSONArray(response);
 							for(int i=0;i<array.length();i++) {
 								JSONObject  object=array.getJSONObject(i);
@@ -304,10 +306,11 @@ public class UtilityService {
 								modelName.add(modelName1);
 								deviceType.add(deviceType1);
 							}
+							}
 							System.out.println(response);
-							String[] subscriberIds=response.split("\"id\": \"");
+							/*String[] subscriberIds=response.split("\"id\": \"");
 							String[] ModifiedSubscriberIds = Arrays.copyOfRange(subscriberIds, 1, subscriberIds.length);
-							System.out.println(ModifiedSubscriberIds.length);
+							System.out.println(ModifiedSubscriberIds.length);*/
 							/*for(String sub:ModifiedSubscriberIds) {
 						String[] subids=sub.split("\",");
 						subscriber.add(subids[0]);
@@ -468,11 +471,11 @@ public class UtilityService {
 			out.close();
 			workbook.close();
 			
-		} catch (Exception e) {
+		} catch (Exception e ) {
 			System.out.println("error in invoke service " + e);
 			e.printStackTrace();
 			
-		} finally {
+		}finally {
 			System.out.println("");
 		}
 	
