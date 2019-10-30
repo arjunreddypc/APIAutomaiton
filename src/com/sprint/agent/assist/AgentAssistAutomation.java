@@ -24,8 +24,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.sprint.aiva.utility.AIVAConstants;
 import com.sprint.aiva.utility.InvalidCertificateTrustManager;
 
