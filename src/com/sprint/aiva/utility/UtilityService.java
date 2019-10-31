@@ -248,7 +248,7 @@ public class UtilityService {
 			List<String> smUsers = new ArrayList<String>();
 			List<String> ban = new ArrayList<String>();			
 			List<String> subscriber = new ArrayList<String>();
-			List<String> id = new ArrayList<String>();
+			List<String> subscribers = new ArrayList<String>();
 			List<String> nickName = new ArrayList<String>();
 			List<String> ptn = new ArrayList<String>();
 			List<String> modelName = new ArrayList<String>();
@@ -287,9 +287,9 @@ public class UtilityService {
 							if (statusCode != HttpStatus.SC_OK) {
 								System.err.println("Method failed: " + method.getStatusLine());
 							}
-							String response = method.getResponseBodyAsString();					
-							if(!response.contains("404")) {
+							String response = method.getResponseBodyAsString();	
 							JSONArray array = new JSONArray(response);
+							System.out.println("No of subscribers are in response is "+array.length());
 							for(int i=0;i<array.length();i++) {
 								JSONObject  object=array.getJSONObject(i);
 								String subscriberId = object.getString("id");
@@ -300,13 +300,19 @@ public class UtilityService {
 								String deviceType1 = object.getString("deviceType");
 								System.out.println("id is "+subscriberId);
 								subscriber.add(subscriberId);
+								subscribers.add(subscriberId);
 								status.add(status1);
 								nickName.add(nickName1);
 								ptn.add(ptn1);
 								modelName.add(modelName1);
 								deviceType.add(deviceType1);
 							}
-							}
+							/*}
+							else {
+								ban.clear();
+								bans.clear();
+								subscriber.clear();
+							}*/
 							System.out.println(response);
 							/*String[] subscriberIds=response.split("\"id\": \"");
 							String[] ModifiedSubscriberIds = Arrays.copyOfRange(subscriberIds, 1, subscriberIds.length);
@@ -333,17 +339,15 @@ public class UtilityService {
 				}
 				outputDetails.put(data.getBan(), flagValues);				
 				if(subscriber.size()>0) {
-					for (int i=0;i<ban.size();i++)
-					{
 						for(int j=0;j<subscriber.size();j++)
 						{
-							bans.add((ban.get(i)));
+							bans.add((ban.get(0)));
 							smUsers.add(data.getSmUser());				
 							
 						}		
-					}
 				}
 				ban.clear();
+				subscriber.clear();
 			}	
 			
 			
@@ -364,13 +368,13 @@ public class UtilityService {
 			header.createCell(8).setCellValue("Contracts");
 			header.createCell(9).setCellValue("Eligibility");
 			
-			for(int j=0;j<subscriber.size();j++)
+			for(int j=0;j<subscribers.size();j++)
 			{
 				Row row=sheet.createRow(temp+1);
 				Cell cell1=row.createCell(0);
 				cell1.setCellValue(bans.get(j));
 				Cell cell=row.createCell(1);
-				cell.setCellValue(subscriber.get(j));
+				cell.setCellValue(subscribers.get(j));
 				Cell cell2=row.createCell(2);
 				cell2.setCellValue(smUsers.get(j));				
 				Cell cell3=row.createCell(3);
@@ -385,9 +389,8 @@ public class UtilityService {
 				cell7.setCellValue(deviceType.get(j));
 				temp=temp+1;
 			}		
-			
 			Iterator<String> bansIterator=bans.iterator();
-			Iterator<String> subscriberIterator=subscriber.iterator();
+			Iterator<String> subscriberIterator=subscribers.iterator();
 			Iterator<String> smUserIterator=smUsers.iterator();
 			while(subscriberIterator.hasNext()) {
 				String $ban=bansIterator.next();
@@ -422,7 +425,7 @@ public class UtilityService {
 						
 			}
 			temp=0;
-			for(int j=0;j<subscriber.size();j++)
+			for(int j=0;j<subscribers.size();j++)
 			{
 				Row row=sheet.getRow(temp+1);
 				Cell cell8=row.createCell(8);
@@ -431,7 +434,7 @@ public class UtilityService {
 			}		
 			bansIterator=bans.iterator();
 			smUserIterator=smUsers.iterator();
-			subscriberIterator=subscriber.iterator();
+			subscriberIterator=subscribers.iterator();
 			while(subscriberIterator.hasNext()) {
 				String $ban=bansIterator.next();
 				String $subscriber=subscriberIterator.next();
@@ -460,7 +463,7 @@ public class UtilityService {
 						
 			}
 			temp=0;
-			for(int j=0;j<subscriber.size();j++)
+			for(int j=0;j<subscribers.size();j++)
 			{
 				Row row=sheet.getRow(temp+1);
 				Cell cell9=row.createCell(9);
