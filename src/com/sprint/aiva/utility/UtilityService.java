@@ -256,6 +256,7 @@ public class UtilityService {
 			List<String> deviceType = new ArrayList<String>();
 			List<String> contracts = new ArrayList<String>();
 			List<String> eligibiltiy = new ArrayList<String>();
+			List<String> accountcontracts = new ArrayList<String>();
 			int temp=0;
 		while (datIterator.hasNext()) {
 				
@@ -287,7 +288,13 @@ public class UtilityService {
 							if (statusCode != HttpStatus.SC_OK) {
 								System.err.println("Method failed: " + method.getStatusLine());
 							}
+							
 							String response = method.getResponseBodyAsString();	
+							boolean b=response.startsWith("[");
+							System.out.println(b);
+							try {
+							if(b==true)
+							{
 							JSONArray array = new JSONArray(response);
 							System.out.println("No of subscribers are in response is "+array.length());
 							for(int i=0;i<array.length();i++) {
@@ -299,13 +306,37 @@ public class UtilityService {
 								String modelName1 = object.getString("modelName");
 								String deviceType1 = object.getString("deviceType");
 								System.out.println("id is "+subscriberId);
-								subscriber.add(subscriberId);
+								subscriber.add(subscriberId); 
 								subscribers.add(subscriberId);
 								status.add(status1);
 								nickName.add(nickName1);
 								ptn.add(ptn1);
 								modelName.add(modelName1);
 								deviceType.add(deviceType1);
+							}
+							}
+							else
+							{
+									JSONObject  object=new JSONObject(response);
+									String subscriberId = object.getString("id");
+									String status1 = object.getString("status");
+									String nickName1 = object.getString("nickName");
+									String ptn1 = object.getString("ptn");
+									String modelName1 = object.getString("modelName");
+									String deviceType1 = object.getString("deviceType");
+									System.out.println("id is "+subscriberId);
+									subscriber.add(subscriberId);
+									subscribers.add(subscriberId);
+									status.add(status1);
+									nickName.add(nickName1);
+									ptn.add(ptn1);
+									modelName.add(modelName1);
+									deviceType.add(deviceType1);
+							}
+							}
+							catch(Exception E)
+							{
+								E.printStackTrace();
 							}
 							/*}
 							else {
@@ -367,7 +398,7 @@ public class UtilityService {
 			header.createCell(7).setCellValue("DeviceType");
 			header.createCell(8).setCellValue("Contracts");
 			header.createCell(9).setCellValue("Eligibility");
-			
+			header.createCell(10).setCellValue("Account Contract");
 			for(int j=0;j<subscribers.size();j++)
 			{
 				Row row=sheet.createRow(temp+1);
@@ -469,18 +500,61 @@ public class UtilityService {
 				Cell cell9=row.createCell(9);
 				cell9.setCellValue(eligibiltiy.get(j));
 				temp=temp+1;
-			}		
+			}
+			/*bansIterator=bans.iterator();
+			smUserIterator=smUsers.iterator();
+			//subscriberIterator=subscribers.iterator();
+			while(bansIterator.hasNext()) {
+				String $ban=bansIterator.next();
+				//String $subscriber=subscriberIterator.next();
+				String $smUser=smUserIterator.next();
+				System.out.println("details are "+$ban+$smUser);
+				String updatedUrl = "https://st1-apiservices-sen.test.sprint.com:8441/api/process/sub/v1/accounts/"+$ban+"/contracts/";
+						GetMethod method = new GetMethod(updatedUrl);
+						
+						method.setRequestHeader("accountId", $ban);					
+						method.setRequestHeader("sm_user", $smUser);
+						method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+						method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+						method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+						method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+						method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+						
+						// Execute the method.
+						int statusCode = client.executeMethod(method);
+						System.out.println("status is "+statusCode);
+						if (statusCode != HttpStatus.SC_OK) {
+							System.err.println("Method failed: " + method.getStatusLine());
+						}
+						String response = method.getResponseBodyAsString();					
+						accountcontracts.add(response);
+						
+						
+			}
+			temp=0;
+			for(int j=0;j<subscribers.size();j++)
+			{
+				Row row=sheet.getRow(temp+1);
+				Cell cell10=row.createCell(9);
+				cell10.setCellValue(accountcontracts.get(j));
+				temp=temp+1;
+			}*/
+			
 			workbook.write(out);
 			out.close();
 			workbook.close();
 			
-		} catch (Exception e ) {
+			
+		} 
+
+		catch (Exception e ) {
 			System.out.println("error in invoke service " + e);
 			e.printStackTrace();
 			
 		}finally {
 			System.out.println("");
 		}
+		
 	
 		
 	}
