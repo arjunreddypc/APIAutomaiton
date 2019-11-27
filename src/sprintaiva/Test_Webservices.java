@@ -332,13 +332,13 @@ public class Test_Webservices extends API_Input {
 										"##########################" + requiredFlags + "//" + value4 + "!!" + flag);
 								if ("array".equalsIgnoreCase(flag)) {
 
-									setValuesToMapFromArray(ban, smuser, jsonArray, value4, requiredFlags,
-											paymentMethodsMap, requiredFlagsList);
+									/*setValuesToMapFromArray(ban, smuser, jsonArray, value4, requiredFlags,
+											paymentMethodsMap, requiredFlagsList);*/
 									System.out.println("$$$$$$$$$$$$$$$$$$$$" + paymentMethodsMap);
 									System.out.println("$$$$$$$$$$$$$$$$$$$$" + requiredFlags);
 								} else if ("object".equalsIgnoreCase(flag)) {
-									setValuesToMap(ban, smuser, js, value4, requiredFlags, paymentMethodsMap,
-											requiredFlagsList);
+									/*setValuesToMap(ban, smuser, js, value4, requiredFlags, paymentMethodsMap,
+											requiredFlagsList);*/
 									System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@" + paymentMethodsMap);
 									System.out.println("$$$$$$$$$$$$$$$$$$$$" + requiredFlags);
 								}
