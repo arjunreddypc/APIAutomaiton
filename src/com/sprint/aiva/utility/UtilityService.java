@@ -31,6 +31,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.seleniumhq.jetty9.server.Authentication.User;
 
 import com.google.gson.JsonArray;
 import com.sprint.aiva.model.ServiceDetails;
@@ -55,6 +56,9 @@ public class UtilityService {
 			DataFormatter formatter = new DataFormatter();
 			XSSFSheet inputSheet = workbook.getSheet("INPUT_SHEET");
 			XSSFSheet apiInfoSheet = workbook.getSheet("API_CONSOLE_INFO");
+			//C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
+			System.out.println(System.getProperty("user.dir"));
+			
 
 			// Fetch details related to test data
 			for (int i = 1; i < inputSheet.getPhysicalNumberOfRows(); i++) {
