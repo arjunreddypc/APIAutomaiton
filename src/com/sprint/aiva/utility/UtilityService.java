@@ -648,6 +648,7 @@ public class UtilityService {
 				Iterator<ServiceDetails> serviceIterator = serviceDetails.iterator();
 				while (serviceIterator.hasNext()) {
 					ServiceDetails service = serviceIterator.next();
+					System.out.println(service.getName());
 					datIterator = testData.iterator();
 					temp=1;
 					while (datIterator.hasNext()) {
@@ -657,7 +658,7 @@ public class UtilityService {
 						flagValues.add(data.getSmUser());
 						System.out.println("For BAN " + data.getBan());					
 					    System.out.println(service.getURL());
-					    if(service.getURL().contains("subscriptions") && !service.getURL().contains("contract")) {
+					    if(service.getName().contains("subscriptions")) {
 							client = new HttpClient();
 							String updatedUrl = service.getURL().contains("$BAN")
 									? service.getURL().replace("$BAN", data.getBan()) : service.getURL();
