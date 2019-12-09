@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -2421,10 +2424,16 @@ public class UtilityService {
 			workbook.close();
 			System.out.println("");
 		}
+		DateFormat df = new SimpleDateFormat("dd-MM-yy-HH-mm-ss");
+		Date dateobj = new Date();
+		System.out.println(String.valueOf(df.format(dateobj)));
 		inputStream = new FileInputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+".xlsx"));
 		workbook = new XSSFWorkbook(inputStream);
 		sheet = workbook.getSheetAt(0);
-		fileOut = new FileOutputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+".xlsx"));
+		fileOut = new FileOutputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+String.valueOf(df.format(dateobj))+".xlsx"));
+		workbook.write(fileOut);
+		fileOut.close();
+		workbook.close();
 		
 		
 	}
