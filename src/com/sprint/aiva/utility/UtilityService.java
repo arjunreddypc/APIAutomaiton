@@ -1377,13 +1377,18 @@ public class UtilityService {
 		
 	}
 	public static void invokeServiceGeneric2() throws JSONException, IOException {
+		FileInputStream inputStream = new FileInputStream(new File(System.getProperty("user.dir")+"\\Results"+".xlsx"));
+		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		FileOutputStream fileOut = new FileOutputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+".xlsx"));
+		
 		String path = System.getProperty("user.dir")+"\\Results1"+".xlsx";
-		FileOutputStream out=new FileOutputStream(new File(path));
-		XSSFWorkbook workbook=new XSSFWorkbook();
+		/*FileOutputStream out=new FileOutputStream(new File(path));
+		workbook=new XSSFWorkbook();*/
 		int temp=1;
 		try {
 			
-			XSSFSheet sheet=null;	   
+			sheet=null;
 			Row header;
 			SSLContext ctx = SSLContext.getInstance("TLS");
 			if (true) {
@@ -1631,12 +1636,14 @@ public class UtilityService {
 													temp=++temp;
 													hs.remove("ban");
 													hs.remove("subscriber");
+													hs.remove("level");
 }
 }
 													if(array.length()==0) {
 															
 															hs.add("ban");
 															hs.add("subscriber");
+															hs.add("level");
 															for(String headerList:hs) {
 																if(headerList.contains("ban")) 
 																{
@@ -1646,6 +1653,10 @@ public class UtilityService {
 																{
 																	System.out.println(data.getSubscriber()+" ,"+data.getBan());
 																	hm.put("subscriber", data.getSubscriber());
+																}
+																else if(headerList.contains("level")) 
+																{
+																	hm.put("level", "accountLevelServices");
 																}
 																else {
 																	System.out.println(headerList);
@@ -1675,6 +1686,7 @@ public class UtilityService {
 															temp=++temp;
 															hs.remove("ban");
 															hs.remove("subscriber");
+															hs.remove("level");
 													}
 												} catch (org.json.JSONException e) {
 													e.printStackTrace();
@@ -1734,12 +1746,14 @@ public class UtilityService {
 													temp=++temp;
 													hs.remove("ban");
 													hs.remove("subscriber");
+													hs.remove("level");
 }
 }
 													if(array.length()==0) {
 															
 															hs.add("ban");
 															hs.add("subscriber");
+															hs.add("level");
 															for(String headerList:hs) {
 																if(headerList.contains("ban")) 
 																{
@@ -1749,6 +1763,10 @@ public class UtilityService {
 																{
 																	System.out.println(data.getSubscriber()+" ,"+data.getBan());
 																	hm.put("subscriber", data.getSubscriber());
+																}
+																else if(headerList.contains("level")) 
+																{
+																	hm.put("level", "subscriptionLevelServices");
 																}
 																else {
 																	System.out.println(headerList);
@@ -1778,6 +1796,7 @@ public class UtilityService {
 															temp=++temp;
 															hs.remove("ban");
 															hs.remove("subscriber");
+															hs.remove("level");
 													}
 												} catch (org.json.JSONException e) {
 													e.printStackTrace();
@@ -1804,12 +1823,14 @@ public class UtilityService {
 										else if(response.toString().contains("Service not available")){
 											if(response.toString().contains("Service not available")) {
 												hm.put("ban", data.getBan());
+												hm.put("subscriber", data.getSubscriber());
 												hm.put("status", response.toString());
 												System.out.println(hm.get("ban")); 
 												System.out.println(hm.get("status"));											
 												header=sheet.createRow(temp);
 												header.createCell(0).setCellValue(hm.get("ban"));
 												header.createCell(1).setCellValue(hm.get("status"));
+												header.createCell(2).setCellValue(hm.get("subscriber"));
 												hm.clear();
 												temp=++temp;
 											}
@@ -2395,12 +2416,15 @@ public class UtilityService {
 			e.printStackTrace();
 			
 		}finally {
-			workbook.write(out);
-			out.close();
+			workbook.write(fileOut);
+			fileOut.close();
 			workbook.close();
 			System.out.println("");
 		}
-		
+		inputStream = new FileInputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+".xlsx"));
+		workbook = new XSSFWorkbook(inputStream);
+		sheet = workbook.getSheetAt(0);
+		fileOut = new FileOutputStream(new File(System.getProperty("user.dir")+"\\FinalResults"+".xlsx"));
 		
 		
 	}
