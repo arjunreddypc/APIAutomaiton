@@ -121,7 +121,7 @@ public class UtilityService {
 		File f=new File(System.getProperty("user.dir")+"\\Results.xlsx");
 		FileInputStream fi=new FileInputStream(f);
 		XSSFWorkbook workbook=new XSSFWorkbook(fi);
-		Sheet sheet=workbook.getSheet("subscriberlist");
+		Sheet sheet=workbook.getSheet("subscribersList");
 		System.out.println(sheet.getLastRowNum()+" is last row number");
 		System.out.println(sheet.getFirstRowNum()+" is first row number");
 		int rows=sheet.getPhysicalNumberOfRows();
@@ -1521,7 +1521,9 @@ public class UtilityService {
 			workbook.close();
 			System.out.println("");
 		}
-
+		out.close();
+		workbook.close();
+		System.out.println("");
 
 
 	}
