@@ -23,6 +23,7 @@ import javax.net.ssl.TrustManager;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.poi.hpsf.Array;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -129,9 +130,9 @@ public class UtilityService {
 		// Fetch details related to test data
 		for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
 			TestData data = new TestData();
-			data.setBan(formatter.formatCellValue(sheet.getRow(i).getCell(13)));
+			data.setBan(formatter.formatCellValue(sheet.getRow(i).getCell(14)));
 			data.setSubscriber(formatter.formatCellValue(sheet.getRow(i).getCell(9)));
-			data.setSmUser(formatter.formatCellValue(sheet.getRow(i).getCell(14)));
+			data.setSmUser(formatter.formatCellValue(sheet.getRow(i).getCell(15)));
 			testData.add(data);
 		}					
 
@@ -661,7 +662,7 @@ public class UtilityService {
 					System.out.println(service.getURL());
 					if(service.getName().contains("subscriptions")) {
 						ArrayList<String> hs=new ArrayList<>();
-						String headerValues[]= {"deviceType","esn","address","unlockSimCapable","nickName","ptn","itemId","modelName","osType","id","callerId","status","primary","ban","smUser","hppttId"};
+						String headerValues[]= {"deviceType","esn","address","unlockSimCapable","nickName","ptn","itemId","modelName","osType","id","callerId","status","primary","hppttId"};
 						for(String hl:headerValues) {
 							hs.add(hl);
 						}
@@ -746,6 +747,8 @@ public class UtilityService {
 												header.createCell(k).setCellValue(hm.get(hs.get(k)));
 											}      
 											hm.clear();
+											hs.remove("ban");
+											hs.remove("smUser");
 											temp=++temp;
 
 
