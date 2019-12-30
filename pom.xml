@@ -5,7 +5,7 @@
  
 
   <groupId>com.sprint.2ie.api</groupId>
-  <artifactId>APIAutomation</artifactId>
+  <artifactId>APIAutomation1</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
   <name>2IE-${project.artifactId}</name>
