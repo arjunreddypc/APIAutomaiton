@@ -7,6 +7,7 @@ public class ServiceDetails {
 	public String URL;
 	public String serviceType;
 	public List<String> requiredFlags;
+	public String requestBody;
 
 	public String getName() {
 		return name;
@@ -18,6 +19,14 @@ public class ServiceDetails {
 
 	public String getURL() {
 		return URL;
+	}
+
+	public String getRequestBody() {
+		return requestBody;
+	}
+
+	public void setRequestBody(String requestBody) {
+		this.requestBody = requestBody;
 	}
 
 	public void setURL(String uRL) {
