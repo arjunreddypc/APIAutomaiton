@@ -55,119 +55,124 @@ public class UtilityService {
 
 	public static void readExcelFile() {
 
-        try {
+		try {
 
-               FileInputStream inputStream = new FileInputStream(new File(AIVAConstants.excellPath));
-               XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-               DataFormatter formatter = new DataFormatter();
-               XSSFSheet inputSheet = workbook.getSheet("INPUT_SHEET");
-               XSSFSheet apiInfoSheet = workbook.getSheet("API_CONSOLE_INFO");
-               // C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
-               System.out.println(System.getProperty("user.dir"));
+			FileInputStream inputStream = new FileInputStream(new File(AIVAConstants.excellPath));
+			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+			DataFormatter formatter = new DataFormatter();
+			XSSFSheet inputSheet = workbook.getSheet("INPUT_SHEET");
+			XSSFSheet apiInfoSheet = workbook.getSheet("API_CONSOLE_INFO");
+			// C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
+			System.out.println(System.getProperty("user.dir"));
 
-               // Fetch details related to test data
-               for (int i = 1; i < inputSheet.getPhysicalNumberOfRows(); i++) {
-                     TestData data = new TestData();
-                     if (formatter.formatCellValue(inputSheet.getRow(i).getCell(0)) != "") {
-                            data.setBan(formatter.formatCellValue(inputSheet.getRow(i).getCell(0)));
-                            data.setSmUser(formatter.formatCellValue(inputSheet.getRow(i).getCell(1)));
-                            System.out.println(inputSheet.getRow(i).getCell(1));
-                            testData.add(data);
-                     } else {
+			// Fetch details related to test data
+			for (int i = 1; i < inputSheet.getPhysicalNumberOfRows(); i++) {
+				TestData data = new TestData();
+				if (formatter.formatCellValue(inputSheet.getRow(i).getCell(0)) != "") {
+					data.setBan(formatter.formatCellValue(inputSheet.getRow(i).getCell(0)));
+					data.setSmUser(formatter.formatCellValue(inputSheet.getRow(i).getCell(1)));
+					System.out.println(inputSheet.getRow(i).getCell(1));
+					testData.add(data);
+				} else {
 
-                     }
-               }
+				}
+			}
 
-               // Fetch details related to API
-               for (int i = 1; i < apiInfoSheet.getPhysicalNumberOfRows(); i++) {
+			// Fetch details related to API
+			for (int i = 1; i < apiInfoSheet.getPhysicalNumberOfRows(); i++) {
 
-                     ServiceDetails service = new ServiceDetails();
-                      service.setName(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(0)));
-                      service.setURL(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(1)));
-                      service.setServiceType(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(3)));
-                      service.setRequestBody(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4)));
-                     String[] flags = formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4)).split(",");
-                     service.setRequiredFlags(Arrays.asList(flags));
-                     serviceDetails.add(service);
-               }
+				ServiceDetails service = new ServiceDetails();
+				service.setName(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(0)));
+				service.setURL(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(1)));
+				service.setServiceType(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(3)));
+				service.setRequestBody(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4)));
+				String[] flags = formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4)).split(",");
+				service.setRequiredFlags(Arrays.asList(flags));
+				serviceDetails.add(service);
+			}
 
-        } catch (Exception e) {
-               System.out.println("There is an issue in retrieving from EXcel" + e);
-        }
- }
+		} catch (Exception e) {
+			System.out.println("There is an issue in retrieving from EXcel" + e);
+		}
+	}
 
 	public static void readExcelFileBANAndSubscriber() throws IOException {
 
-        try {
+		try {
 
-               FileInputStream inputStream = new FileInputStream(new File(AIVAConstants.excellPath));
-               XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
-               DataFormatter formatter = new DataFormatter();
-               XSSFSheet apiInfoSheet = workbook.getSheet("API_CONSOLE_INFO");
-               // C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
-               System.out.println(System.getProperty("user.dir"));
+			FileInputStream inputStream = new FileInputStream(new File(AIVAConstants.excellPath));
+			XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+			DataFormatter formatter = new DataFormatter();
+			XSSFSheet apiInfoSheet = workbook.getSheet("API_CONSOLE_INFO");
+			// C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
+			System.out.println(System.getProperty("user.dir"));
 
-               XSSFSheet inputSheet = workbook.getSheet("INPUT_SHEET");
+			XSSFSheet inputSheet = workbook.getSheet("INPUT_SHEET");
 
-               // C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
-               System.out.println(System.getProperty("user.dir"));
+			// C:\ProgramData\Eclipse\eclipse-workspace\eclipse-workspace\APIAutomaiton\demo.xlsx
+			System.out.println(System.getProperty("user.dir"));
 
-               // Fetch details related to test data
+			// Fetch details related to test data
 
-               // Fetch details related to API
-               for (int i = 1; i < apiInfoSheet.getPhysicalNumberOfRows(); i++) {
+			// Fetch details related to API
+			for (int i = 1; i < apiInfoSheet.getPhysicalNumberOfRows(); i++) {
 
-                     ServiceDetails service = new ServiceDetails();
-                      service.setName(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(0)));
-                      service.setURL(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(1)));
-                      service.setServiceType(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(2)));
-                      service.setRequestBody((formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4))));
-                     String[] flags = formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(3)).split(",");
-                     service.setRequiredFlags(Arrays.asList(flags));
-                     serviceDetails.add(service);
-               }
+				ServiceDetails service = new ServiceDetails();
+				service.setName(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(0)));
+				service.setURL(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(1)));
+				service.setServiceType(formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(2)));
+				service.setRequestBody((formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(4))));
+				String[] flags = formatter.formatCellValue(apiInfoSheet.getRow(i).getCell(3)).split(",");
+				service.setRequiredFlags(Arrays.asList(flags));
+				serviceDetails.add(service);
+			}
 
-        } catch (Exception e) {
-               System.out.println("There is an issue in retrieving from EXcel" + e);
-        }
-        DataFormatter formatter = new DataFormatter();
-        ArrayList<String> bans = new ArrayList<String>();
-        ArrayList<String> subscribers = new ArrayList<String>();
-        System.out.println(System.getProperty("user.dir"));
-        File f = new File(System.getProperty("user.dir") + "\\Results.xlsx");
-        FileInputStream fi = new FileInputStream(f);
-        XSSFWorkbook workbook = new XSSFWorkbook(fi);
-        Sheet sheet = workbook.getSheet("subscribersList");
-        Sheet Future_Payments = workbook.getSheet("future-payments");
-        System.out.println(sheet.getLastRowNum() + " is last row number");
-        System.out.println(sheet.getFirstRowNum() + " is first row number");
-        
-        int rows = sheet.getPhysicalNumberOfRows();
-        int future_payments_rows = Future_Payments.getPhysicalNumberOfRows();
-        Row row = sheet.getRow(0);
-        // Fetch details related to test data
+		} catch (Exception e) {
+			System.out.println("There is an issue in retrieving from EXcel" + e);
+		}
+		DataFormatter formatter = new DataFormatter();
+		ArrayList<String> bans = new ArrayList<String>();
+		ArrayList<String> subscribers = new ArrayList<String>();
+		System.out.println(System.getProperty("user.dir"));
+		File f = new File(System.getProperty("user.dir") + "\\Results.xlsx");
+		FileInputStream fi = new FileInputStream(f);
+		XSSFWorkbook workbook = new XSSFWorkbook(fi);
+		Sheet sheet = workbook.getSheet("subscribersList");
+		Sheet Future_Payments = workbook.getSheet("future-payments");
+		System.out.println(sheet.getLastRowNum() + " is last row number");
+		System.out.println(sheet.getFirstRowNum() + " is first row number");
 
-        for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
-               TestData data = new TestData();
-               if (formatter.formatCellValue(sheet.getRow(i).getCell(14)) != "") {
-                     data.setBan(formatter.formatCellValue(sheet.getRow(i).getCell(14)));
-                      data.setSubscriber(formatter.formatCellValue(sheet.getRow(i).getCell(9)));
-                     data.setSmUser(formatter.formatCellValue(sheet.getRow(i).getCell(15)));
-                     data.setPtn(formatter.formatCellValue(sheet.getRow(i).getCell(5)));
-                     testData.add(data);
-               }
-        }
+		int rows = sheet.getPhysicalNumberOfRows();
+		int future_payments_rows = 0;
+		try {
+			future_payments_rows = Future_Payments.getPhysicalNumberOfRows();
+		} catch (Exception e) {
+			System.out.println("Please check future payments sheet in Results file");
+		}
+		Row row = sheet.getRow(0);
+		// Fetch details related to test data
 
-        for (int i = 1; i < future_payments_rows; i++) {
-               TestData future_payments = new TestData();
-               if (formatter.formatCellValue(Future_Payments.getRow(i).getCell(12)) != "") {
-                      future_payments.setBan(formatter.formatCellValue(Future_Payments.getRow(i).getCell(12)));
-                      future_payments.setVoucherNumber(formatter.formatCellValue(Future_Payments.getRow(i).getCell(6)));
-                     Futurepayments.add(future_payments);
-               }
-        }
+		for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) {
+			TestData data = new TestData();
+			if (formatter.formatCellValue(sheet.getRow(i).getCell(14)) != "") {
+				data.setBan(formatter.formatCellValue(sheet.getRow(i).getCell(14)));
+				data.setSubscriber(formatter.formatCellValue(sheet.getRow(i).getCell(9)));
+				data.setSmUser(formatter.formatCellValue(sheet.getRow(i).getCell(15)));
+				data.setPtn(formatter.formatCellValue(sheet.getRow(i).getCell(5)));
+				testData.add(data);
+			}
+		}
 
- }
+		for (int i = 1; i < future_payments_rows; i++) {
+			TestData future_payments = new TestData();
+			if (formatter.formatCellValue(Future_Payments.getRow(i).getCell(12)) != "") {
+				future_payments.setBan(formatter.formatCellValue(Future_Payments.getRow(i).getCell(12)));
+				future_payments.setVoucherNumber(formatter.formatCellValue(Future_Payments.getRow(i).getCell(6)));
+				Futurepayments.add(future_payments);
+			}
+		}
+
+	}
 
 	public static void writeToExcelFile() {
 		try {
@@ -695,293 +700,7 @@ public class UtilityService {
 						String headersList[]= {"contractType","contractId","monthlyPayment","contractTermInMonths","canPayoffLease","durationInMonths","timeRemainingInMonths","purchaseOptionPrice","extendedMonthly","startDate","upfrontPayment","leaseSequenceNumber","flexLeaseInd","flexPurchasePreferenceInd","currentLeaseTermStatus","amtFromCustToPurchase","leaseUnbilledAmount","canSetPurchaseIntent","canSignIBPPO","canCancelIBPPO","itemId","itemName","ppoContractDetails","loanSequenceNumber","loanAmount","loanPaidAmount","payOffAmount","canPayoffLoan","flexLoanInd","bundledItemIds"};
 						for(String hl:headersList) {
 							hs.add(hl);
-							
-						}
-						System.out.println("payment methods headers size is"+hs.size());
-						client = new HttpClient();
-						al.clear();
-						if(temp==1) {
-							sheet=workbook.createSheet("accountlevel-contracts");
-						}
-						String updatedUrl = service.getURL().contains("$BAN")
-								? service.getURL().replace("$BAN", data.getBan()) : service.getURL();
-										GetMethod method = new GetMethod(updatedUrl);
-										method.setRequestHeader("accountId", data.getBan());					
-										method.setRequestHeader("sm_user", data.getSmUser());
-										method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-										method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-										method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-										method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-										method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-										
-										// Execute the method.
-										int statusCode = client.executeMethod(method);
-										
-										if (statusCode != HttpStatus.SC_OK) {
-											System.err.println("Method failed: " + method.getStatusLine());
-										}
-										String response = method.getResponseBodyAsString();	
-										System.out.println("Response is "+response);
-										boolean b=response.startsWith("[");
-										boolean b1=response.startsWith("{");
-										System.out.println(b);
-										try {
-											if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()>0)
-											{
-												JSONArray array = new JSONArray(response);
-												System.out.println("No of subscribers are in response is "+array.length());
-												
-												for(int i=0;i<array.length();i++) {
-													JSONObject  object=array.getJSONObject(i);
-													System.out.println(object.keySet());
-													hs.add("ban");
-													for(String headerList:hs) {
-														if(headerList.contains("ban")) 
-														{
-															hm.put("ban", data.getBan());
-														}
-														else {
-															System.out.println(headerList);
-															try {
-																hm.put(headerList, String.valueOf(object.get(headerList)));
-															}catch(Exception E) {
-																hm.put(headerList, "");
-															}
-														}
-														
-													}
-													if (temp==1) {
-														
-														header=sheet.createRow(0);
-														System.out.println("headers list is size is" + hs.size());
-														for (int k = 0; k < hs.size(); k++) {
-															header.createCell(k).setCellValue(hs.get(k));
-														}
-													}
-													header=sheet.createRow(temp);
-													for(int k=0;k<hs.size();k++) {
-														
-														header.createCell(k).setCellValue(hm.get(hs.get(k)));
-													}	
-													hm.clear();
-													temp=++temp;
-													if(temp>1) {
-														hs.remove("ban");
-													}
-													
-												}	
-												
-											}
-											else if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()==0)
-											{
-												JSONArray array = new JSONArray(response);
-												System.out.println("No of subscribers are in response is "+array.length());
-												hs.add("ban");
-												for(String headerList:hs) {
-													if(headerList.contains("ban")) 
-													{
-														hm.put("ban", data.getBan());
-														
-													}
-													else {
-														System.out.println(headerList);
-														try {
-															hm.put(headerList, String.valueOf(""));
-														}catch(Exception E) {
-															hm.put(headerList, "");
-														}
-													}
-													
-												}
-												if (temp==1) {
-													
-													header=sheet.createRow(0);
-													System.out.println("headers list is size is" + hs.size());
-													for (int k = 0; k < hs.size(); k++) {
-														header.createCell(k).setCellValue(hs.get(k));
-													}
-												}
-												header=sheet.createRow(temp);
-												for(int k=0;k<hs.size();k++) {
-													
-													header.createCell(k).setCellValue(hm.get(hs.get(k)));
-												}	
-												hm.clear();
-												temp=++temp;
-												
-												
-											}
-											else if (b1 && response.contains("errorMessage")) {
-												hs.add("ban");
-												hs.add("subscriber");
-												for(String headerList:hs) {
-													if(headerList.contains("ban")) 
-													{
-														hm.put("ban", data.getBan());
-													}
-													if(headerList.contains("subscriber")) 
-													{
-														System.out.println(data.getSubscriber()+" ,"+data.getBan());
-														hm.put("subscriber", data.getSubscriber());
-													}
-												}
-												if (temp==1) {
-													header=sheet.createRow(0);
-													System.out.println("headers list is size is" + hs.size());
-													for (int k = 0; k < hs.size(); k++) {
-														header.createCell(k).setCellValue(hs.get(k));
-													}
-												}
-												header=sheet.createRow(temp);
-												for(int k=0;k<hs.size();k++) {
-													
-													header.createCell(k).setCellValue(hm.get(hs.get(k)));
-												}	
-												header.createCell(hs.size()).setCellValue(response);
-												hm.clear();
-												temp=++temp;
-												hs.remove("ban");
-												hs.remove("subscriber");
-											}
-											else if (b1 && !response.contains("errorMessage")) {
-												{
-													System.out.println(response);
-													JSONObject object = new JSONObject(response);
-													JSONArray array=object.getJSONArray("contracts");
-													System.out.println(array.length());
-													if(array.length()>0) {
-														for(int i=0;i<array.length();i++) {
-															JSONObject object1=array.getJSONObject(i);
-															
-															System.out.println("No of subscribers are in response is "+object.length());
-															al.clear();
-															al.addAll(object1.keySet());
-															hs.add("ban");
-															for(String headerList:hs) {
-																if(headerList.contains("ban")) 
-																{
-																	hm.put("ban", data.getBan());
-																}
-																else {
-																	System.out.println(headerList);
-																	try {
-																		System.out.println(String.valueOf(object1.get(headerList)));
-																		hm.put(headerList, String.valueOf(object1.get(headerList)));
-																	} catch (Exception e) {
-																		hm.put(headerList, "");
-																	}
-																}
-																
-															}
-															System.out.println(path);
-															if (temp==1) {
-																header=sheet.createRow(0);
-																System.out.println("headers list is size is" + hs.size());
-																for (int k = 0; k < hs.size(); k++) {
-																	header.createCell(k).setCellValue(hs.get(k));
-																}
-															}
-															header=sheet.createRow(temp);
-															for(int k=0;k<hs.size();k++) {
-																
-																header.createCell(k).setCellValue(hm.get(hs.get(k)));
-															}	
-															hm.clear();
-															temp=++temp;
-															hs.remove("ban");
-															hs.remove("subscriber");
-														}
-													}
-													if(array.length()==0) {
-														
-														hs.add("ban");
-														for(String headerList:hs) {
-															if(headerList.contains("ban")) 
-															{
-																hm.put("ban", data.getBan());
-															}
-															else {
-																System.out.println(headerList);
-																try {
-																	System.out.println(String.valueOf(""));
-																	hm.put(headerList, String.valueOf(""));
-																} catch (Exception e) {
-																	hm.put(headerList, "");
-																}
-															}
-															
-														}
-														System.out.println(path);
-														if (temp==1) {
-															header=sheet.createRow(0);
-															System.out.println("headers list is size is" + hs.size());
-															for (int k = 0; k < hs.size(); k++) {
-																header.createCell(k).setCellValue(hs.get(k));
-															}
-														}
-														header=sheet.createRow(temp);
-														for(int k=0;k<hs.size();k++) {
-															
-															header.createCell(k).setCellValue(hm.get(hs.get(k)));
-														}	
-														hm.clear();
-														temp=++temp;
-														hs.remove("ban");
-														hs.remove("subscriber");
-													}
-													
-												}
-											}
-											else if(response.toString().contains("errorMessage"))
-											{
-												JSONObject  object=new JSONObject(response);
-												if(object.toString().contains("errorMessage")) {
-													hm.put("ban", data.getBan());
-													hm.put("status", object.toString());
-													System.out.println(hm.get("ban")); 
-													System.out.println(hm.get("status"));											
-													header=sheet.createRow(temp);
-													header.createCell(0).setCellValue(hm.get("ban"));
-													header.createCell(1).setCellValue(hm.get("status"));
-													hm.clear();
-													temp=++temp;
-												}
-												
-											}
-											else if(response.toString().contains("Service not available")){
-												if(response.toString().contains("Service not available")) {
-													hm.put("ban", data.getBan());
-													hm.put("status", response.toString());
-													System.out.println(hm.get("ban")); 
-													System.out.println(hm.get("status"));											
-													header=sheet.createRow(temp);
-													header.createCell(0).setCellValue(hm.get("ban"));
-													header.createCell(1).setCellValue(hm.get("status"));
-													hm.clear();
-													temp=++temp;
-												}
-											}
-											
-										}
-										catch(Exception E)
-										{
-											E.printStackTrace();
-										}
-										System.out.println(service.getRequiredFlags().size());
-										for (int i = 0; i < service.getRequiredFlags().size(); i++) {
-											
-											System.out.println(service.getRequiredFlags().get(i) + ":"
-													+ getJsonValue(response, service.getRequiredFlags().get(i)));
-											flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
-											
-										}
-										System.out.println("Validation completed for " + service.getName());		}
-					if(service.getName().contains("accountplans")) {
-						ArrayList<String> hs=new ArrayList<>();
-						String headersList[]= {"contractType","contractId","monthlyPayment","contractTermInMonths","canPayoffLease","durationInMonths","timeRemainingInMonths","purchaseOptionPrice","extendedMonthly","startDate","upfrontPayment","leaseSequenceNumber","flexLeaseInd","flexPurchasePreferenceInd","currentLeaseTermStatus","amtFromCustToPurchase","leaseUnbilledAmount","canSetPurchaseIntent","canSignIBPPO","canCancelIBPPO","itemId","itemName","ppoContractDetails","loanSequenceNumber","loanAmount","loanPaidAmount","payOffAmount","canPayoffLoan","flexLoanInd","bundledItemIds"};
-						for(String hl:headersList) {
-							hs.add(hl);
-							
+
 						}
 						System.out.println("payment methods headers size is"+hs.size());
 						client = new HttpClient();
@@ -999,10 +718,10 @@ public class UtilityService {
 								method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
 								method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
 								method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-								
+
 								// Execute the method.
 								int statusCode = client.executeMethod(method);
-								
+
 								if (statusCode != HttpStatus.SC_OK) {
 									System.err.println("Method failed: " + method.getStatusLine());
 								}
@@ -1016,7 +735,7 @@ public class UtilityService {
 									{
 										JSONArray array = new JSONArray(response);
 										System.out.println("No of subscribers are in response is "+array.length());
-										
+
 										for(int i=0;i<array.length();i++) {
 											JSONObject  object=array.getJSONObject(i);
 											System.out.println(object.keySet());
@@ -1034,10 +753,10 @@ public class UtilityService {
 														hm.put(headerList, "");
 													}
 												}
-												
+
 											}
 											if (temp==1) {
-												
+
 												header=sheet.createRow(0);
 												System.out.println("headers list is size is" + hs.size());
 												for (int k = 0; k < hs.size(); k++) {
@@ -1046,7 +765,7 @@ public class UtilityService {
 											}
 											header=sheet.createRow(temp);
 											for(int k=0;k<hs.size();k++) {
-												
+
 												header.createCell(k).setCellValue(hm.get(hs.get(k)));
 											}	
 											hm.clear();
@@ -1054,9 +773,9 @@ public class UtilityService {
 											if(temp>1) {
 												hs.remove("ban");
 											}
-											
+
 										}	
-										
+
 									}
 									else if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()==0)
 									{
@@ -1067,7 +786,7 @@ public class UtilityService {
 											if(headerList.contains("ban")) 
 											{
 												hm.put("ban", data.getBan());
-												
+
 											}
 											else {
 												System.out.println(headerList);
@@ -1077,10 +796,10 @@ public class UtilityService {
 													hm.put(headerList, "");
 												}
 											}
-											
+
 										}
 										if (temp==1) {
-											
+
 											header=sheet.createRow(0);
 											System.out.println("headers list is size is" + hs.size());
 											for (int k = 0; k < hs.size(); k++) {
@@ -1089,13 +808,13 @@ public class UtilityService {
 										}
 										header=sheet.createRow(temp);
 										for(int k=0;k<hs.size();k++) {
-											
+
 											header.createCell(k).setCellValue(hm.get(hs.get(k)));
 										}	
 										hm.clear();
 										temp=++temp;
-										
-										
+
+
 									}
 									else if (b1 && response.contains("errorMessage")) {
 										hs.add("ban");
@@ -1120,7 +839,7 @@ public class UtilityService {
 										}
 										header=sheet.createRow(temp);
 										for(int k=0;k<hs.size();k++) {
-											
+
 											header.createCell(k).setCellValue(hm.get(hs.get(k)));
 										}	
 										header.createCell(hs.size()).setCellValue(response);
@@ -1138,7 +857,7 @@ public class UtilityService {
 											if(array.length()>0) {
 												for(int i=0;i<array.length();i++) {
 													JSONObject object1=array.getJSONObject(i);
-													
+
 													System.out.println("No of subscribers are in response is "+object.length());
 													al.clear();
 													al.addAll(object1.keySet());
@@ -1157,7 +876,7 @@ public class UtilityService {
 																hm.put(headerList, "");
 															}
 														}
-														
+
 													}
 													System.out.println(path);
 													if (temp==1) {
@@ -1169,7 +888,7 @@ public class UtilityService {
 													}
 													header=sheet.createRow(temp);
 													for(int k=0;k<hs.size();k++) {
-														
+
 														header.createCell(k).setCellValue(hm.get(hs.get(k)));
 													}	
 													hm.clear();
@@ -1179,7 +898,7 @@ public class UtilityService {
 												}
 											}
 											if(array.length()==0) {
-												
+
 												hs.add("ban");
 												for(String headerList:hs) {
 													if(headerList.contains("ban")) 
@@ -1195,7 +914,7 @@ public class UtilityService {
 															hm.put(headerList, "");
 														}
 													}
-													
+
 												}
 												System.out.println(path);
 												if (temp==1) {
@@ -1207,7 +926,7 @@ public class UtilityService {
 												}
 												header=sheet.createRow(temp);
 												for(int k=0;k<hs.size();k++) {
-													
+
 													header.createCell(k).setCellValue(hm.get(hs.get(k)));
 												}	
 												hm.clear();
@@ -1215,7 +934,7 @@ public class UtilityService {
 												hs.remove("ban");
 												hs.remove("subscriber");
 											}
-											
+
 										}
 									}
 									else if(response.toString().contains("errorMessage"))
@@ -1232,7 +951,7 @@ public class UtilityService {
 											hm.clear();
 											temp=++temp;
 										}
-										
+
 									}
 									else if(response.toString().contains("Service not available")){
 										if(response.toString().contains("Service not available")) {
@@ -1247,7 +966,7 @@ public class UtilityService {
 											temp=++temp;
 										}
 									}
-									
+
 								}
 								catch(Exception E)
 								{
@@ -1255,509 +974,795 @@ public class UtilityService {
 								}
 								System.out.println(service.getRequiredFlags().size());
 								for (int i = 0; i < service.getRequiredFlags().size(); i++) {
-									
+
 									System.out.println(service.getRequiredFlags().get(i) + ":"
 											+ getJsonValue(response, service.getRequiredFlags().get(i)));
 									flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
-									
+
+								}
+								System.out.println("Validation completed for " + service.getName());		}
+					if(service.getName().contains("accountplans")) {
+						ArrayList<String> hs=new ArrayList<>();
+						String headersList[]= {"planCode","planId","isVideoChoiceEligible","Name","description","spanishPlanTypeDesc","SpanishLongDesc","type","allowanceInfo","subscriptionList"};
+						for(String hl:headersList) {
+							hs.add(hl);
+
+						}
+						System.out.println("payment methods headers size is"+hs.size());
+						client = new HttpClient();
+						al.clear();
+						if(temp==1) {
+							sheet=workbook.createSheet("account-plans");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan()) : service.getURL();
+								GetMethod method = new GetMethod(updatedUrl);
+								method.setRequestHeader("accountId", data.getBan());					
+								method.setRequestHeader("sm_user", data.getSmUser());
+								method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+								method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+								method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+								method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+								method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+
+								// Execute the method.
+								int statusCode = client.executeMethod(method);
+
+								if (statusCode != HttpStatus.SC_OK) {
+									System.err.println("Method failed: " + method.getStatusLine());
+								}
+								String response = method.getResponseBodyAsString();	
+								System.out.println("Response is "+response);
+								boolean b=response.startsWith("[");
+								boolean b1=response.startsWith("{");
+								System.out.println(b);
+								try {
+									if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()>0)
+									{
+										JSONArray array = new JSONArray(response);
+										System.out.println("No of subscribers are in response is "+array.length());
+
+										for(int i=0;i<array.length();i++) {
+											JSONObject  object=array.getJSONObject(i);
+											System.out.println(object.keySet());
+											hs.add("ban");
+											for(String headerList:hs) {
+												if(headerList.contains("ban")) 
+												{
+													hm.put("ban", data.getBan());
+												}
+												else {
+													System.out.println(headerList);
+													try {
+														hm.put(headerList, String.valueOf(object.get(headerList)));
+													}catch(Exception E) {
+														hm.put(headerList, "");
+													}
+												}
+
+											}
+											if (temp==1) {
+
+												header=sheet.createRow(0);
+												System.out.println("headers list is size is" + hs.size());
+												for (int k = 0; k < hs.size(); k++) {
+													header.createCell(k).setCellValue(hs.get(k));
+												}
+											}
+											header=sheet.createRow(temp);
+											for(int k=0;k<hs.size();k++) {
+
+												header.createCell(k).setCellValue(hm.get(hs.get(k)));
+											}	
+											hm.clear();
+											temp=++temp;
+											if(temp>1) {
+												hs.remove("ban");
+											}
+
+										}	
+
+									}
+									else if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()==0)
+									{
+										JSONArray array = new JSONArray(response);
+										System.out.println("No of subscribers are in response is "+array.length());
+										hs.add("ban");
+										for(String headerList:hs) {
+											if(headerList.contains("ban")) 
+											{
+												hm.put("ban", data.getBan());
+
+											}
+											else {
+												System.out.println(headerList);
+												try {
+													hm.put(headerList, String.valueOf(""));
+												}catch(Exception E) {
+													hm.put(headerList, "");
+												}
+											}
+
+										}
+										if (temp==1) {
+
+											header=sheet.createRow(0);
+											System.out.println("headers list is size is" + hs.size());
+											for (int k = 0; k < hs.size(); k++) {
+												header.createCell(k).setCellValue(hs.get(k));
+											}
+										}
+										header=sheet.createRow(temp);
+										for(int k=0;k<hs.size();k++) {
+
+											header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										}	
+										hm.clear();
+										temp=++temp;
+
+
+									}
+									else if (b1 && response.contains("errorMessage")) {
+										hs.add("ban");
+										hs.add("subscriber");
+										for(String headerList:hs) {
+											if(headerList.contains("ban")) 
+											{
+												hm.put("ban", data.getBan());
+											}
+											if(headerList.contains("subscriber")) 
+											{
+												System.out.println(data.getSubscriber()+" ,"+data.getBan());
+												hm.put("subscriber", data.getSubscriber());
+											}
+										}
+										if (temp==1) {
+											header=sheet.createRow(0);
+											System.out.println("headers list is size is" + hs.size());
+											for (int k = 0; k < hs.size(); k++) {
+												header.createCell(k).setCellValue(hs.get(k));
+											}
+										}
+										header=sheet.createRow(temp);
+										for(int k=0;k<hs.size();k++) {
+
+											header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										}	
+										header.createCell(hs.size()).setCellValue(response);
+										hm.clear();
+										temp=++temp;
+										hs.remove("ban");
+										hs.remove("subscriber");
+									}
+									else if (b1 && !response.contains("errorMessage")) {
+										{
+											System.out.println(response);
+											JSONObject object = new JSONObject(response);
+											JSONArray array=object.getJSONArray("contracts");
+											System.out.println(array.length());
+											if(array.length()>0) {
+												for(int i=0;i<array.length();i++) {
+													JSONObject object1=array.getJSONObject(i);
+
+													System.out.println("No of subscribers are in response is "+object.length());
+													al.clear();
+													al.addAll(object1.keySet());
+													hs.add("ban");
+													for(String headerList:hs) {
+														if(headerList.contains("ban")) 
+														{
+															hm.put("ban", data.getBan());
+														}
+														else {
+															System.out.println(headerList);
+															try {
+																System.out.println(String.valueOf(object1.get(headerList)));
+																hm.put(headerList, String.valueOf(object1.get(headerList)));
+															} catch (Exception e) {
+																hm.put(headerList, "");
+															}
+														}
+
+													}
+													System.out.println(path);
+													if (temp==1) {
+														header=sheet.createRow(0);
+														System.out.println("headers list is size is" + hs.size());
+														for (int k = 0; k < hs.size(); k++) {
+															header.createCell(k).setCellValue(hs.get(k));
+														}
+													}
+													header=sheet.createRow(temp);
+													for(int k=0;k<hs.size();k++) {
+
+														header.createCell(k).setCellValue(hm.get(hs.get(k)));
+													}	
+													hm.clear();
+													temp=++temp;
+													hs.remove("ban");
+													hs.remove("subscriber");
+												}
+											}
+											if(array.length()==0) {
+
+												hs.add("ban");
+												for(String headerList:hs) {
+													if(headerList.contains("ban")) 
+													{
+														hm.put("ban", data.getBan());
+													}
+													else {
+														System.out.println(headerList);
+														try {
+															System.out.println(String.valueOf(""));
+															hm.put(headerList, String.valueOf(""));
+														} catch (Exception e) {
+															hm.put(headerList, "");
+														}
+													}
+
+												}
+												System.out.println(path);
+												if (temp==1) {
+													header=sheet.createRow(0);
+													System.out.println("headers list is size is" + hs.size());
+													for (int k = 0; k < hs.size(); k++) {
+														header.createCell(k).setCellValue(hs.get(k));
+													}
+												}
+												header=sheet.createRow(temp);
+												for(int k=0;k<hs.size();k++) {
+
+													header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												}	
+												hm.clear();
+												temp=++temp;
+												hs.remove("ban");
+												hs.remove("subscriber");
+											}
+
+										}
+									}
+									else if(response.toString().contains("errorMessage"))
+									{
+										JSONObject  object=new JSONObject(response);
+										if(object.toString().contains("errorMessage")) {
+											hm.put("ban", data.getBan());
+											hm.put("status", object.toString());
+											System.out.println(hm.get("ban")); 
+											System.out.println(hm.get("status"));											
+											header=sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp=++temp;
+										}
+
+									}
+									else if(response.toString().contains("Service not available")){
+										if(response.toString().contains("Service not available")) {
+											hm.put("ban", data.getBan());
+											hm.put("status", response.toString());
+											System.out.println(hm.get("ban")); 
+											System.out.println(hm.get("status"));											
+											header=sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp=++temp;
+										}
+									}
+
+								}
+								catch(Exception E)
+								{
+									E.printStackTrace();
+								}
+								System.out.println(service.getRequiredFlags().size());
+								for (int i = 0; i < service.getRequiredFlags().size(); i++) {
+
+									System.out.println(service.getRequiredFlags().get(i) + ":"
+											+ getJsonValue(response, service.getRequiredFlags().get(i)));
+									flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
+
 								}
 								System.out.println("Validation completed for " + service.getName());		}
 
 					if (service.getURL().contains("accountbasicinfo")) {
 
-                        ArrayList<String> hs = new ArrayList<>();
-                        String headersList[] = { "basicInfo", "billingAddressInfo", "billingNameInfo", "headerInfo",
-                                      "lockBoxInfo", "otherNameInfo", "splitBillInfo", "subscriberCountInfo", "macInfo",
-                                      "otherInfo" };
-                        for (String hl : headersList) {
-                               hs.add(hl);
+						ArrayList<String> hs = new ArrayList<>();
+						String headersList[] = { "basicInfo", "billingAddressInfo", "billingNameInfo", "headerInfo",
+								"lockBoxInfo", "otherNameInfo", "splitBillInfo", "subscriberCountInfo", "macInfo",
+						"otherInfo" };
+						for (String hl : headersList) {
+							hs.add(hl);
 
-                        }
-                        client = new HttpClient();
-                        al.clear();
-                        if (temp == 1) {
-                               sheet = workbook.createSheet("Accountbasic-Info");
-                        }
-                        String updatedUrl = service.getURL().contains("$BAN")
-                                      ? service.getURL().replace("$BAN", data.getBan())
-                                      : service.getURL();
-                        /*
-                        * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
-                        * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
-                        * service.getURL();
-                        */
-                        PostMethod method = new PostMethod(updatedUrl);
+						}
+						client = new HttpClient();
+						al.clear();
+						if (temp == 1) {
+							sheet = workbook.createSheet("Accountbasic-Info");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan())
+										: service.getURL();
+								/*
+								 * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
+								 * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
+								 * service.getURL();
+								 */
+								PostMethod method = new PostMethod(updatedUrl);
 
-                        // method.setRequestHeader("accountId", data.getBan());
-                        // method.setRequestHeader("sm_user", data.getSmUser());
-                        method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                        method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                        method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                        method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                        method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-                        method.setRequestHeader("consumerId", "WebApp");
-                        method.setRequestHeader("conversationId", "123");
+								// method.setRequestHeader("accountId", data.getBan());
+								// method.setRequestHeader("sm_user", data.getSmUser());
+								method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+								method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+								method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+								method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+								method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+								method.setRequestHeader("consumerId", "WebApp");
+								method.setRequestHeader("conversationId", "123");
 
-                        // Execute the method.
-                        // JSONObject RequestBody=new JSONObject(service.getRequestBody());
+								// Execute the method.
+								// JSONObject RequestBody=new JSONObject(service.getRequestBody());
 
-                        String RequestBody = service.getRequestBody().replace("$BAN", data.getBan());
+								String RequestBody = service.getRequestBody().replace("$BAN", data.getBan());
 
-                        StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
+								StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
 
-                        // RequestEntity request1=new RequestEntity();
+								// RequestEntity request1=new RequestEntity();
 
-                        method.setRequestEntity(request);
-                        int statusCode = client.executeMethod(method);
+								method.setRequestEntity(request);
+								int statusCode = client.executeMethod(method);
 
-                        if (statusCode != HttpStatus.SC_OK) {
-                               System.err.println("Method failed: " + method.getStatusLine());
-                        }
-                        String response = method.getResponseBodyAsString();
-                        System.out.println("Response is " + response);
-                        boolean b1 = response.startsWith("{");
-                        try {
-                               if (b1 && response.contains("errorMessage")) {
-                                      hs.add("ban");
-                                      /* hs.add("subscriber"); */
-                                      for (String headerList : hs) {
-                                             if (headerList.contains("ban")) {
-                                                    hm.put("ban", data.getBan());
-                                             } /*
-                                                    * else if (headerList.contains("subscriber")) {
-                                                    * System.out.println(data.getSubscriber() + " ," + data.getBan());
-                                                    * hm.put("subscriber", data.getSubscriber()); }
-                                                    */
-                                      }
-                                      if (temp == 1) {
-                                             header = sheet.createRow(0);
-                                             System.out.println("headers list is size is" + hs.size());
-                                             for (int k = 0; k < hs.size(); k++) {
-                                                    header.createCell(k).setCellValue(hs.get(k));
-                                             }
-                                      }
-                                      header = sheet.createRow(temp);
-                                      for (int k = 0; k < hs.size(); k++) {
+								if (statusCode != HttpStatus.SC_OK) {
+									System.err.println("Method failed: " + method.getStatusLine());
+								}
+								String response = method.getResponseBodyAsString();
+								System.out.println("Response is " + response);
+								boolean b1 = response.startsWith("{");
+								try {
+									if (b1 && response.contains("errorMessage")) {
+										hs.add("ban");
+										/* hs.add("subscriber"); */
+										for (String headerList : hs) {
+											if (headerList.contains("ban")) {
+												hm.put("ban", data.getBan());
+											} /*
+											 * else if (headerList.contains("subscriber")) {
+											 * System.out.println(data.getSubscriber() + " ," + data.getBan());
+											 * hm.put("subscriber", data.getSubscriber()); }
+											 */
+										}
+										if (temp == 1) {
+											header = sheet.createRow(0);
+											System.out.println("headers list is size is" + hs.size());
+											for (int k = 0; k < hs.size(); k++) {
+												header.createCell(k).setCellValue(hs.get(k));
+											}
+										}
+										header = sheet.createRow(temp);
+										for (int k = 0; k < hs.size(); k++) {
 
-                                             header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                      }
-                                      header.createCell(hs.size()).setCellValue(response);
-                                      hm.clear();
-                                      temp = ++temp;
-                                      hs.remove("ban");
-                                      hs.remove("subscriber");
-                               } else if (b1 && !response.contains("errorMessage")) {
-                                      {
+											header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										}
+										header.createCell(hs.size()).setCellValue(response);
+										hm.clear();
+										temp = ++temp;
+										hs.remove("ban");
+										hs.remove("subscriber");
+									} else if (b1 && !response.contains("errorMessage")) {
+										{
 
-                                             JSONObject object = new JSONObject(response);
+											JSONObject object = new JSONObject(response);
 
-                                             JSONObject object1 = object.getJSONObject("queryAccountBasicInfoResponse");
+											JSONObject object1 = object.getJSONObject("queryAccountBasicInfoResponse");
 
-                                             // JSONObject object1=object2.getJSONObject("paEligibilityInfo");
+											// JSONObject object1=object2.getJSONObject("paEligibilityInfo");
 
-                                             al.clear();
-                                             al.addAll(object1.keySet());
-                                             hs.add("ban");
+											al.clear();
+											al.addAll(object1.keySet());
+											hs.add("ban");
 
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", data.getBan());
-                                                    }
+											for (String headerList : hs) {
+												if (headerList.contains("ban")) {
+													hm.put("ban", data.getBan());
+												}
 
-                                                    /*
-                                                    * else if (headerList.contains("subscriber")) {
-                                                    * System.out.println(data.getSubscriber() + " ," + data.getSubscriber());
-                                                    * hm.put("subscriber", data.getSubscriber()); }
-                                                   */
-                                                    else {
-                                                          try {
-                                                                 /*
-                                                                 * if(headerList.contains("basicInfo")) {
-                                                                 * 
-                                                                  * JSONObject object2= object1.getJSONObject("basicInfo"); for (String
-                                                                 * hl : HeaderList2) { hs2.add(hl);
-                                                                 * 
-                                                                  * }
-                                                                 * 
-                                                                  * for(String HeaderList3:hs2) { hm.put(headerList,
-                                                                 * String.valueOf(object2.get(HeaderList3))); } }
-                                                                 */
-                                                                 System.out.println(String.valueOf(object1.get(headerList)));
-                                                                 hm.put(headerList, String.valueOf(object1.get(headerList)));
-                                                          } catch (Exception e) {
-                                                                 hm.put(headerList, "");
-                                                          }
-                                                    }
-                                             }
+												/*
+												 * else if (headerList.contains("subscriber")) {
+												 * System.out.println(data.getSubscriber() + " ," + data.getSubscriber());
+												 * hm.put("subscriber", data.getSubscriber()); }
+												 */
+												else {
+													try {
+														/*
+														 * if(headerList.contains("basicInfo")) {
+														 * 
+														 * JSONObject object2= object1.getJSONObject("basicInfo"); for (String
+														 * hl : HeaderList2) { hs2.add(hl);
+														 * 
+														 * }
+														 * 
+														 * for(String HeaderList3:hs2) { hm.put(headerList,
+														 * String.valueOf(object2.get(HeaderList3))); } }
+														 */
+														System.out.println(String.valueOf(object1.get(headerList)));
+														hm.put(headerList, String.valueOf(object1.get(headerList)));
+													} catch (Exception e) {
+														hm.put(headerList, "");
+													}
+												}
+											}
 
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
+											if (temp == 1) {
+												header = sheet.createRow(0);
 
-                                                    /*
-                                                    * for (String hl : HeaderList2) { hs2.add(hl);
-                                                    * 
-                                                     * } hs.addAll(hs2);
-                                                    */
+												/*
+												 * for (String hl : HeaderList2) { hs2.add(hl);
+												 * 
+												 * } hs.addAll(hs2);
+												 */
 
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+												System.out.println("headers list is size is" + hs.size());
+												for (int k = 0; k < hs.size(); k++) {
+													header.createCell(k).setCellValue(hs.get(k));
+												}
+											}
+											header = sheet.createRow(temp);
+											for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												header.createCell(k).setCellValue(hm.get(hs.get(k)));
 
-                                             }
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                             // hs.remove("subscriber");
-                                      }
-                               }
+											}
+											hm.clear();
+											temp = ++temp;
+											hs.remove("ban");
+											// hs.remove("subscriber");
+										}
+									}
 
-                               else if (response.toString().contains("errorMessage")) {
-                                      JSONObject object = new JSONObject(response);
-                                      if (object.toString().contains("errorMessage")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("status", object.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
+									else if (response.toString().contains("errorMessage")) {
+										JSONObject object = new JSONObject(response);
+										if (object.toString().contains("errorMessage")) {
+											hm.put("ban", data.getBan());
+											hm.put("status", object.toString());
+											System.out.println(hm.get("ban"));
+											System.out.println(hm.get("status"));
+											header = sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp = ++temp;
+										}
 
-                               } else if (response.toString().contains("Service not available")) {
+									} else if (response.toString().contains("Service not available")) {
 
-                                      hm.put("ban", data.getBan());
-                                      hm.put("status", response.toString());
-                                      System.out.println(hm.get("ban"));
-                                      System.out.println(hm.get("status"));
-                                      header = sheet.createRow(temp);
-                                      header.createCell(0).setCellValue(hm.get("ban"));
-                                      header.createCell(1).setCellValue(hm.get("status"));
-                                      hm.clear();
-                                      temp = ++temp;
+										hm.put("ban", data.getBan());
+										hm.put("status", response.toString());
+										System.out.println(hm.get("ban"));
+										System.out.println(hm.get("status"));
+										header = sheet.createRow(temp);
+										header.createCell(0).setCellValue(hm.get("ban"));
+										header.createCell(1).setCellValue(hm.get("status"));
+										hm.clear();
+										temp = ++temp;
 
-                               }
+									}
 
-                        } catch (Exception E) {
-                               E.printStackTrace();
-                        }
+								} catch (Exception E) {
+									E.printStackTrace();
+								}
 
-                        System.out.println("Validation completed for " + service.getName());
-                 }
+								System.out.println("Validation completed for " + service.getName());
+					}
 
 					if (service.getName().equalsIgnoreCase("payment-eligibility-create")) {
 
-                        ArrayList<String> hs = new ArrayList<>();
-                        String headersList[] = { "eligibilityInd" };
-                        for (String hl : headersList) {
-                               hs.add(hl);
+						ArrayList<String> hs = new ArrayList<>();
+						String headersList[] = { "eligibilityInd" };
+						for (String hl : headersList) {
+							hs.add(hl);
 
-                        }
-                        client = new HttpClient();
-                        al.clear();
-                        if (temp == 1) {
-                               sheet = workbook.createSheet("Payment-Eligibility");
-                        }
-                        String updatedUrl = service.getURL().contains("$BAN")
-                                      ? service.getURL().replace("$BAN", data.getBan())
-                                      : service.getURL();
-                        /*
-                        * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
-                        * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
-                        * service.getURL();
-                        */
-                        PostMethod method = new PostMethod(updatedUrl);
+						}
+						client = new HttpClient();
+						al.clear();
+						if (temp == 1) {
+							sheet = workbook.createSheet("Payment-Eligibility");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan())
+										: service.getURL();
+								/*
+								 * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
+								 * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
+								 * service.getURL();
+								 */
+								PostMethod method = new PostMethod(updatedUrl);
 
-                        // method.setRequestHeader("accountId", data.getBan());
-                        // method.setRequestHeader("sm_user", data.getSmUser());
-                        method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                        method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                        method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                        method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                        method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-                        method.setRequestHeader("consumerId", "WEBCHAT");
-                        method.setRequestHeader("conversationId", "123");
+								// method.setRequestHeader("accountId", data.getBan());
+								// method.setRequestHeader("sm_user", data.getSmUser());
+								method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+								method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+								method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+								method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+								method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+								method.setRequestHeader("consumerId", "WEBCHAT");
+								method.setRequestHeader("conversationId", "123");
 
-                        // Execute the method.
-                        JSONObject RequestBody = new JSONObject(service.getRequestBody());
+								// Execute the method.
+								JSONObject RequestBody = new JSONObject(service.getRequestBody());
 
-                        StringRequestEntity request = new StringRequestEntity(RequestBody.toString(),
-                                      "application/json", "UTF-8");
+								StringRequestEntity request = new StringRequestEntity(RequestBody.toString(),
+										"application/json", "UTF-8");
 
-                        // RequestEntity request1=new RequestEntity();
+								// RequestEntity request1=new RequestEntity();
 
-                        method.setRequestEntity(request);
-                        int statusCode = client.executeMethod(method);
+								method.setRequestEntity(request);
+								int statusCode = client.executeMethod(method);
 
-                        if (statusCode != HttpStatus.SC_CREATED) {
-                               System.err.println("Method failed: " + method.getStatusLine());
-                        }
-                        String response = method.getResponseBodyAsString();
-                        System.out.println("Response is " + response);
-                        boolean b1 = response.startsWith("{");
-                        try {
-                               if (b1 && response.contains("errorMessage")) {
-                                      hs.add("ban");
-                                      /* hs.add("subscriber"); */
-                                      for (String headerList : hs) {
-                                             if (headerList.contains("ban")) {
-                                                    hm.put("ban", data.getBan());
-                                            } /*
-                                                    * else if (headerList.contains("subscriber")) {
-                                                    * System.out.println(data.getSubscriber() + " ," + data.getBan());
-                                                    * hm.put("subscriber", data.getSubscriber()); }
-                                                    */
-                                      }
-                                      if (temp == 1) {
-                                             header = sheet.createRow(0);
-                                             System.out.println("headers list is size is" + hs.size());
-                                             for (int k = 0; k < hs.size(); k++) {
-                                                    header.createCell(k).setCellValue(hs.get(k));
-                                             }
-                                      }
-                                      header = sheet.createRow(temp);
-                                      for (int k = 0; k < hs.size(); k++) {
+								if (statusCode != HttpStatus.SC_CREATED) {
+									System.err.println("Method failed: " + method.getStatusLine());
+								}
+								String response = method.getResponseBodyAsString();
+								System.out.println("Response is " + response);
+								boolean b1 = response.startsWith("{");
+								try {
+									if (b1 && response.contains("errorMessage")) {
+										hs.add("ban");
+										/* hs.add("subscriber"); */
+										for (String headerList : hs) {
+											if (headerList.contains("ban")) {
+												hm.put("ban", data.getBan());
+											} /*
+											 * else if (headerList.contains("subscriber")) {
+											 * System.out.println(data.getSubscriber() + " ," + data.getBan());
+											 * hm.put("subscriber", data.getSubscriber()); }
+											 */
+										}
+										if (temp == 1) {
+											header = sheet.createRow(0);
+											System.out.println("headers list is size is" + hs.size());
+											for (int k = 0; k < hs.size(); k++) {
+												header.createCell(k).setCellValue(hs.get(k));
+											}
+										}
+										header = sheet.createRow(temp);
+										for (int k = 0; k < hs.size(); k++) {
 
-                                             header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                      }
-                                      header.createCell(hs.size()).setCellValue(response);
-                                      hm.clear();
-                                      temp = ++temp;
-                                      hs.remove("ban");
-                                      hs.remove("subscriber");
-                               } else if (b1 && !response.contains("errorMessage")) {
-                                      {
-                                             // System.out.println(response);
+											header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										}
+										header.createCell(hs.size()).setCellValue(response);
+										hm.clear();
+										temp = ++temp;
+										hs.remove("ban");
+										hs.remove("subscriber");
+									} else if (b1 && !response.contains("errorMessage")) {
+										{
+											// System.out.println(response);
 
-                                             JSONObject object = new JSONObject(response);
+											JSONObject object = new JSONObject(response);
 
-                                             JSONObject object2 = object.getJSONObject("checkAccountPaymentEligibilityResponse");
+											JSONObject object2 = object.getJSONObject("checkAccountPaymentEligibilityResponse");
 
-                                             JSONObject object1 = object2.getJSONObject("paEligibilityInfo");
+											JSONObject object1 = object2.getJSONObject("paEligibilityInfo");
 
-                                             al.clear();
-                                             al.addAll(object1.keySet());
-                                             hs.add("ban");
+											al.clear();
+											al.addAll(object1.keySet());
+											hs.add("ban");
 
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", data.getBan());
-                                                    }
+											for (String headerList : hs) {
+												if (headerList.contains("ban")) {
+													hm.put("ban", data.getBan());
+												}
 
-                                                    /*
-                                                    * else if (headerList.contains("subscriber")) {
-                                                    * System.out.println(data.getSubscriber() + " ," + data.getSubscriber());
-                                                    * hm.put("subscriber", data.getSubscriber()); }
-                                                    */
+												/*
+												 * else if (headerList.contains("subscriber")) {
+												 * System.out.println(data.getSubscriber() + " ," + data.getSubscriber());
+												 * hm.put("subscriber", data.getSubscriber()); }
+												 */
 
-                                                    else {
-                                                          try {
-                                                                 System.out.println(String.valueOf(object1.get(headerList)));
-                                                                 hm.put(headerList, String.valueOf(object1.get(headerList)));
-                                                          } catch (Exception e) {
-                                                                 hm.put(headerList, "");
-                                                          }
-                                                    }
-                                             }
+												else {
+													try {
+														System.out.println(String.valueOf(object1.get(headerList)));
+														hm.put(headerList, String.valueOf(object1.get(headerList)));
+													} catch (Exception e) {
+														hm.put(headerList, "");
+													}
+												}
+											}
 
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+											if (temp == 1) {
+												header = sheet.createRow(0);
+												System.out.println("headers list is size is" + hs.size());
+												for (int k = 0; k < hs.size(); k++) {
+													header.createCell(k).setCellValue(hs.get(k));
+												}
+											}
+											header = sheet.createRow(temp);
+											for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												header.createCell(k).setCellValue(hm.get(hs.get(k)));
 
-                                             }
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                             // hs.remove("subscriber");
-                                      }
-                               }
+											}
+											hm.clear();
+											temp = ++temp;
+											hs.remove("ban");
+											// hs.remove("subscriber");
+										}
+									}
 
-                               else if (response.toString().contains("errorMessage")) {
-                                      JSONObject object = new JSONObject(response);
-                                      if (object.toString().contains("errorMessage")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("status", object.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
+									else if (response.toString().contains("errorMessage")) {
+										JSONObject object = new JSONObject(response);
+										if (object.toString().contains("errorMessage")) {
+											hm.put("ban", data.getBan());
+											hm.put("status", object.toString());
+											System.out.println(hm.get("ban"));
+											System.out.println(hm.get("status"));
+											header = sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp = ++temp;
+										}
 
-                               } else if (response.toString().contains("Service not available")) {
+									} else if (response.toString().contains("Service not available")) {
 
-                                      hm.put("ban", data.getBan());
-                                      hm.put("status", response.toString());
-                                      System.out.println(hm.get("ban"));
-                                      System.out.println(hm.get("status"));
-                                      header = sheet.createRow(temp);
-                                      header.createCell(0).setCellValue(hm.get("ban"));
-                                      header.createCell(1).setCellValue(hm.get("status"));
-                                      hm.clear();
-                                      temp = ++temp;
+										hm.put("ban", data.getBan());
+										hm.put("status", response.toString());
+										System.out.println(hm.get("ban"));
+										System.out.println(hm.get("status"));
+										header = sheet.createRow(temp);
+										header.createCell(0).setCellValue(hm.get("ban"));
+										header.createCell(1).setCellValue(hm.get("status"));
+										hm.clear();
+										temp = ++temp;
 
-                               }
+									}
 
-                        } catch (Exception E) {
-                               E.printStackTrace();
-                        }
+								} catch (Exception E) {
+									E.printStackTrace();
+								}
 
-                        System.out.println("Validation completed for " + service.getName());
-                 }
-                 if (service.getURL().contains("negative-listed")) {
+								System.out.println("Validation completed for " + service.getName());
+					}
+					if (service.getURL().contains("negative-listed")) {
 
-                        ArrayList<String> hs = new ArrayList<>();
-                        String headersList[] = { "isNegativeListed" };
-                        for (String hl : headersList) {
-                               hs.add(hl);
+						ArrayList<String> hs = new ArrayList<>();
+						String headersList[] = { "isNegativeListed" };
+						for (String hl : headersList) {
+							hs.add(hl);
 
-                        }
-                        client = new HttpClient();
-                        al.clear();
-                        if (temp == 1) {
-                               sheet = workbook.createSheet("negative-listed");
-                        }
-                        String updatedUrl = service.getURL().contains("$BAN")
-                                      ? service.getURL().replace("$BAN", data.getBan())
-                                      : service.getURL();
-                        GetMethod method = new GetMethod(updatedUrl);
+						}
+						client = new HttpClient();
+						al.clear();
+						if (temp == 1) {
+							sheet = workbook.createSheet("negative-listed");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan())
+										: service.getURL();
+								GetMethod method = new GetMethod(updatedUrl);
 
-                        method.setRequestHeader("accountId", data.getBan());
-                        // method.setRequestHeader("sm_user", data.getSmUser());
-                        method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                        method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                        method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                        method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                        method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-                        method.setRequestHeader("consumerId", "WEBCHAT");
-                        method.setRequestHeader("conversationId", "123");
-                        int statusCode = client.executeMethod(method);
+								method.setRequestHeader("accountId", data.getBan());
+								// method.setRequestHeader("sm_user", data.getSmUser());
+								method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+								method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+								method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+								method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+								method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+								method.setRequestHeader("consumerId", "WEBCHAT");
+								method.setRequestHeader("conversationId", "123");
+								int statusCode = client.executeMethod(method);
 
-                        if (statusCode != HttpStatus.SC_OK) {
-                               System.err.println("Method failed: " + method.getStatusLine());
-                        }
-                        String response = method.getResponseBodyAsString();
-                        System.out.println("Response is " + response);
-                        boolean b1 = response.startsWith("{");
-                        try {
-                               if (b1 && response.contains("errorMessage")) {
-                                      hs.add("ban");
+								if (statusCode != HttpStatus.SC_OK) {
+									System.err.println("Method failed: " + method.getStatusLine());
+								}
+								String response = method.getResponseBodyAsString();
+								System.out.println("Response is " + response);
+								boolean b1 = response.startsWith("{");
+								try {
+									if (b1 && response.contains("errorMessage")) {
+										hs.add("ban");
 
-                                      for (String headerList : hs) {
-                                             if (headerList.contains("ban")) {
-                                                    hm.put("ban", data.getBan());
-                                             }
-                                      }
-                                      if (temp == 1) {
-                                             header = sheet.createRow(0);
-                                             System.out.println("headers list is size is" + hs.size());
-                                             for (int k = 0; k < hs.size(); k++) {
-                                                    header.createCell(k).setCellValue(hs.get(k));
-                                             }
-                                      }
-                                      header = sheet.createRow(temp);
-                                      for (int k = 0; k < hs.size(); k++) {
+										for (String headerList : hs) {
+											if (headerList.contains("ban")) {
+												hm.put("ban", data.getBan());
+											}
+										}
+										if (temp == 1) {
+											header = sheet.createRow(0);
+											System.out.println("headers list is size is" + hs.size());
+											for (int k = 0; k < hs.size(); k++) {
+												header.createCell(k).setCellValue(hs.get(k));
+											}
+										}
+										header = sheet.createRow(temp);
+										for (int k = 0; k < hs.size(); k++) {
 
-                                             header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                      }
-                                      header.createCell(hs.size()).setCellValue(response);
-                                      hm.clear();
-                                      temp = ++temp;
-                                      hs.remove("ban");
+											header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										}
+										header.createCell(hs.size()).setCellValue(response);
+										hm.clear();
+										temp = ++temp;
+										hs.remove("ban");
 
-                               } else if (b1 && !response.contains("errorMessage")) {
-                                      {
+									} else if (b1 && !response.contains("errorMessage")) {
+										{
 
-                                             JSONObject object = new JSONObject(response);
-                                             al.clear();
-                                             al.addAll(object.keySet());
-                                             hs.add("ban");
+											JSONObject object = new JSONObject(response);
+											al.clear();
+											al.addAll(object.keySet());
+											hs.add("ban");
 
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", data.getBan());
-                                                    }
+											for (String headerList : hs) {
+												if (headerList.contains("ban")) {
+													hm.put("ban", data.getBan());
+												}
 
-                                                    else {
-                                                          try {
-                                                                 System.out.println(String.valueOf(object.get(headerList)));
-                                                                 hm.put(headerList, String.valueOf(object.get(headerList)));
-                                                          } catch (Exception e) {
-                                                                 hm.put(headerList, "");
-                                                          }
-                                                    }
-                                             }
+												else {
+													try {
+														System.out.println(String.valueOf(object.get(headerList)));
+														hm.put(headerList, String.valueOf(object.get(headerList)));
+													} catch (Exception e) {
+														hm.put(headerList, "");
+													}
+												}
+											}
 
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+											if (temp == 1) {
+												header = sheet.createRow(0);
+												System.out.println("headers list is size is" + hs.size());
+												for (int k = 0; k < hs.size(); k++) {
+													header.createCell(k).setCellValue(hs.get(k));
+												}
+											}
+											header = sheet.createRow(temp);
+											for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												header.createCell(k).setCellValue(hm.get(hs.get(k)));
 
-                                             }
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                      }
-                               }
+											}
+											hm.clear();
+											temp = ++temp;
+											hs.remove("ban");
+										}
+									}
 
-                               else if (response.toString().contains("errorMessage")) {
-                                      JSONObject object = new JSONObject(response);
-                                      if (object.toString().contains("errorMessage")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("status", object.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
+									else if (response.toString().contains("errorMessage")) {
+										JSONObject object = new JSONObject(response);
+										if (object.toString().contains("errorMessage")) {
+											hm.put("ban", data.getBan());
+											hm.put("status", object.toString());
+											System.out.println(hm.get("ban"));
+											System.out.println(hm.get("status"));
+											header = sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp = ++temp;
+										}
 
-                               } else if (response.toString().contains("Service not available")) {
+									} else if (response.toString().contains("Service not available")) {
 
-                                      hm.put("ban", data.getBan());
-                                      hm.put("status", response.toString());
-                                      System.out.println(hm.get("ban"));
-                                      System.out.println(hm.get("status"));
-                                      header = sheet.createRow(temp);
-                                      header.createCell(0).setCellValue(hm.get("ban"));
-                                      header.createCell(1).setCellValue(hm.get("status"));
-                                      hm.clear();
-                                      temp = ++temp;
+										hm.put("ban", data.getBan());
+										hm.put("status", response.toString());
+										System.out.println(hm.get("ban"));
+										System.out.println(hm.get("status"));
+										header = sheet.createRow(temp);
+										header.createCell(0).setCellValue(hm.get("ban"));
+										header.createCell(1).setCellValue(hm.get("status"));
+										hm.clear();
+										temp = ++temp;
 
-                               }
+									}
 
-                        } catch (Exception E) {
-                               E.printStackTrace();
-                        }
+								} catch (Exception E) {
+									E.printStackTrace();
+								}
 
-                        System.out.println("Validation completed for " + service.getName());
-                 }
+								System.out.println("Validation completed for " + service.getName());
+					}
 
 					if(service.getName().contains("subscriptions")) {
 						ArrayList<String> hs=new ArrayList<>();
@@ -2671,544 +2676,544 @@ public class UtilityService {
 					System.out.println("For BAN " + data.getBan());					
 					System.out.println(service.getURL());
 					if (service.getURL().contains("subscriberservices")) {
-                        System.out.println("For subscriber " + data.getSubscriber());
-                        ArrayList<String> hs = new ArrayList<>();
-                        String headersList[] = { "socCode", "socType", "featureCode", "serviceType", "name",
-                                      "effectiveDate", "isUsageType", "isSwitchType", "socSeqNumber", "featureSeqNumber",
-                                      "pttInd", "pttNaiReq", "pamInd", "networkInd", "hppttInd", "evdoInd", "abInd",
-                                      "glmsInd", "winInd", "recurringCharge", "billDisplayInd" };
-                        for (String hl : headersList) {
-                               hs.add(hl);
+						System.out.println("For subscriber " + data.getSubscriber());
+						ArrayList<String> hs = new ArrayList<>();
+						String headersList[] = { "socCode", "socType", "featureCode", "serviceType", "name",
+								"effectiveDate", "isUsageType", "isSwitchType", "socSeqNumber", "featureSeqNumber",
+								"pttInd", "pttNaiReq", "pamInd", "networkInd", "hppttInd", "evdoInd", "abInd",
+								"glmsInd", "winInd", "recurringCharge", "billDisplayInd" };
+						for (String hl : headersList) {
+							hs.add(hl);
 
-                        }
-                        System.out.println("subscriber servicese header size is " + hs.size());
-                        client = new HttpClient();
-                        al.clear();
-                        if (temp == 1) {
-                               sheet = workbook.createSheet("subscriber-services");
-                        }
-                        String updatedUrl = service.getURL().contains("$BAN")
-                                      ? service.getURL().replace("$BAN", data.getBan())
-                                      : service.getURL();
-                        updatedUrl = updatedUrl.contains("$SUBSCRIBER")
-                                      ? updatedUrl.replace("$SUBSCRIBER", data.getSubscriber())
-                                      : service.getURL();
-                        PostMethod method = new PostMethod(updatedUrl);
-                        method.setRequestHeader("accountId", data.getBan());
-                        method.setRequestHeader("sm_user", data.getSmUser());
-                        method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                        method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                        method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                        method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                        method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+						}
+						System.out.println("subscriber servicese header size is " + hs.size());
+						client = new HttpClient();
+						al.clear();
+						if (temp == 1) {
+							sheet = workbook.createSheet("subscriber-services");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan())
+										: service.getURL();
+								updatedUrl = updatedUrl.contains("$SUBSCRIBER")
+										? updatedUrl.replace("$SUBSCRIBER", data.getSubscriber())
+												: service.getURL();
+										PostMethod method = new PostMethod(updatedUrl);
+										method.setRequestHeader("accountId", data.getBan());
+										method.setRequestHeader("sm_user", data.getSmUser());
+										method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+										method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+										method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+										method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+										method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
 
-                        String RequestBody = service.getRequestBody().replace("$PTN", data.getPtn());
+										String RequestBody = service.getRequestBody().replace("$PTN", data.getPtn());
 
-                        System.out.println(RequestBody);
+										System.out.println(RequestBody);
 
-                        StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
+										StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
 
-                        method.setRequestEntity(request);
+										method.setRequestEntity(request);
 
-                        int statusCode = client.executeMethod(method);
+										int statusCode = client.executeMethod(method);
 
-                        if (statusCode != HttpStatus.SC_OK) {
-                               System.err.println("Method failed: " + method.getStatusLine());
-                        }
-                        String response = method.getResponseBodyAsString();
-                        System.out.println("Response is " + response);
-                        boolean b = response.startsWith("[");
-                        boolean b1 = response.startsWith("{");
-                        try {
-                               if (b1 && !response.contains("error message")) {
-                                      JSONObject object1 = new JSONObject(response);
-                                      JSONObject object2 = object1.getJSONObject("querySubscriberServicesResponse");
-                                      JSONObject object3 = object2.getJSONObject("featureList");
-                                      JSONArray array = object3.getJSONArray("featureInfo");
+										if (statusCode != HttpStatus.SC_OK) {
+											System.err.println("Method failed: " + method.getStatusLine());
+										}
+										String response = method.getResponseBodyAsString();
+										System.out.println("Response is " + response);
+										boolean b = response.startsWith("[");
+										boolean b1 = response.startsWith("{");
+										try {
+											if (b1 && !response.contains("error message")) {
+												JSONObject object1 = new JSONObject(response);
+												JSONObject object2 = object1.getJSONObject("querySubscriberServicesResponse");
+												JSONObject object3 = object2.getJSONObject("featureList");
+												JSONArray array = object3.getJSONArray("featureInfo");
 
-                                      if (array.length() > 0) {
-                                             for (int i = 0; i < array.length(); i++) {
-                                                    JSONObject object = array.getJSONObject(i);
-                                                    System.out.println(object.keySet());
-                                                    hs.add("ban");
-                                                    hs.add("subscriber");
-                                                    hs.add("SM_User");
-                                                    for (String headerList : hs) {
-                                                          if (headerList.contains("ban")) {
-                                                                 hm.put("ban", data.getBan());
-                                                          } else if (headerList.contains("subscriber")) {
-                                                                 hm.put("subscriber", data.getSubscriber());
-                                                          } else if (headerList.contains("SM_User")) {
-                                                                 hm.put("SM_User", data.getSmUser());
-                                                          } else {
-                                                                 try {
-                                                                        hm.put(headerList, String.valueOf(object.get(headerList)));
-                                                                 } catch (Exception E) {
-                                                                        hm.put(headerList, "");
-                                                                 }
-                                                          }
+												if (array.length() > 0) {
+													for (int i = 0; i < array.length(); i++) {
+														JSONObject object = array.getJSONObject(i);
+														System.out.println(object.keySet());
+														hs.add("ban");
+														hs.add("subscriber");
+														hs.add("SM_User");
+														for (String headerList : hs) {
+															if (headerList.contains("ban")) {
+																hm.put("ban", data.getBan());
+															} else if (headerList.contains("subscriber")) {
+																hm.put("subscriber", data.getSubscriber());
+															} else if (headerList.contains("SM_User")) {
+																hm.put("SM_User", data.getSmUser());
+															} else {
+																try {
+																	hm.put(headerList, String.valueOf(object.get(headerList)));
+																} catch (Exception E) {
+																	hm.put(headerList, "");
+																}
+															}
 
-                                                    }
-                                                    if (temp == 1) {
+														}
+														if (temp == 1) {
 
-                                                          header = sheet.createRow(0);
-                                                           System.out.println("headers list is size is" + hs.size());
-                                                          for (int k = 0; k < hs.size(); k++) {
-                                                                 header.createCell(k).setCellValue(hs.get(k));
-                                                          }
-                                                    }
-                                                    header = sheet.createRow(temp);
-                                                    for (int k = 0; k < hs.size(); k++) {
+															header = sheet.createRow(0);
+															System.out.println("headers list is size is" + hs.size());
+															for (int k = 0; k < hs.size(); k++) {
+																header.createCell(k).setCellValue(hs.get(k));
+															}
+														}
+														header = sheet.createRow(temp);
+														for (int k = 0; k < hs.size(); k++) {
 
-                                                           header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                                    }
-                                                    hm.clear();
-                                                    temp = ++temp;
-                                                    if (temp > 1) {
-                                                          hs.remove("ban");
-                                                          hs.remove("SM_User");
-                                                          hs.remove("subscriber");
-                                                    }
+															header.createCell(k).setCellValue(hm.get(hs.get(k)));
+														}
+														hm.clear();
+														temp = ++temp;
+														if (temp > 1) {
+															hs.remove("ban");
+															hs.remove("SM_User");
+															hs.remove("subscriber");
+														}
 
-                                             }
-                                      } else {
+													}
+												} else {
 
-                                             hs.add("ban");
-                                             hs.add("subscriber");
-                                             hs.add("SM_User");
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", data.getBan());
-                                                    } else if (headerList.contains("subscriber")) {
+													hs.add("ban");
+													hs.add("subscriber");
+													hs.add("SM_User");
+													for (String headerList : hs) {
+														if (headerList.contains("ban")) {
+															hm.put("ban", data.getBan());
+														} else if (headerList.contains("subscriber")) {
 
-                                                          hm.put("subscriber", data.getSubscriber());
-                                                    } else if (headerList.contains("SM_User")) {
-                                                          hm.put("SM_User", data.getSmUser());
-                                                    }
+															hm.put("subscriber", data.getSubscriber());
+														} else if (headerList.contains("SM_User")) {
+															hm.put("SM_User", data.getSmUser());
+														}
 
-                                                    else {
-                                                           System.out.println(headerList);
-                                                          try {
-                                                                 System.out.println(String.valueOf(""));
-                                                                 hm.put(headerList, String.valueOf(""));
-                                                          } catch (Exception e) {
-                                                                 hm.put(headerList, "");
-                                                          }
-                                                    }
+														else {
+															System.out.println(headerList);
+															try {
+																System.out.println(String.valueOf(""));
+																hm.put(headerList, String.valueOf(""));
+															} catch (Exception e) {
+																hm.put(headerList, "");
+															}
+														}
 
-                                             }
-                                             System.out.println(path);
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+													}
+													System.out.println(path);
+													if (temp == 1) {
+														header = sheet.createRow(0);
+														System.out.println("headers list is size is" + hs.size());
+														for (int k = 0; k < hs.size(); k++) {
+															header.createCell(k).setCellValue(hs.get(k));
+														}
+													}
+													header = sheet.createRow(temp);
+													for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                             }
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                             hs.remove("subscriber");
-                                             hs.remove("SM_User");
+														header.createCell(k).setCellValue(hm.get(hs.get(k)));
+													}
+													hm.clear();
+													temp = ++temp;
+													hs.remove("ban");
+													hs.remove("subscriber");
+													hs.remove("SM_User");
 
-                                      }
+												}
 
-                               }
+											}
 
-                               else if (b1 && response.contains("errorMessage")) {
-                                      hs.add("ban");
-                                      hs.add("subscriber");
-                                      hs.add("SM_User");
-                                      for (String headerList : hs) {
-                                             if (headerList.contains("ban")) {
-                                                    hm.put("ban", data.getBan());
-                                             } else if (headerList.contains("subscriber")) {
-                                                    System.out.println(data.getSubscriber() + " ," + data.getBan());
-                                                    hm.put("subscriber", data.getSubscriber());
-                                             } else if (headerList.contains("SM_User")) {
-                                                    hm.put("SM_User", data.getSmUser());
-                                             }
-                                      }
-                                      if (temp == 1) {
-                                             header = sheet.createRow(0);
-                                             System.out.println("headers list is size is" + hs.size());
-                                             for (int k = 0; k < hs.size(); k++) {
-                                                    header.createCell(k).setCellValue(hs.get(k));
-                                             }
-                                      }
-                                      header = sheet.createRow(temp);
-                                      for (int k = 0; k < hs.size(); k++) {
+											else if (b1 && response.contains("errorMessage")) {
+												hs.add("ban");
+												hs.add("subscriber");
+												hs.add("SM_User");
+												for (String headerList : hs) {
+													if (headerList.contains("ban")) {
+														hm.put("ban", data.getBan());
+													} else if (headerList.contains("subscriber")) {
+														System.out.println(data.getSubscriber() + " ," + data.getBan());
+														hm.put("subscriber", data.getSubscriber());
+													} else if (headerList.contains("SM_User")) {
+														hm.put("SM_User", data.getSmUser());
+													}
+												}
+												if (temp == 1) {
+													header = sheet.createRow(0);
+													System.out.println("headers list is size is" + hs.size());
+													for (int k = 0; k < hs.size(); k++) {
+														header.createCell(k).setCellValue(hs.get(k));
+													}
+												}
+												header = sheet.createRow(temp);
+												for (int k = 0; k < hs.size(); k++) {
 
-                                             header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                      }
-                                      header.createCell(hs.size()).setCellValue(response);
-                                      hm.clear();
-                                      temp = ++temp;
-                                      hs.remove("ban");
-                                      hs.remove("subscriber");
-                                      hs.remove("SM_User");
-                               }
+													header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												}
+												header.createCell(hs.size()).setCellValue(response);
+												hm.clear();
+												temp = ++temp;
+												hs.remove("ban");
+												hs.remove("subscriber");
+												hs.remove("SM_User");
+											}
 
-                               else if (response.toString().contains("errorMessage")) {
-                                      JSONObject object = new JSONObject(response);
-                                      if (object.toString().contains("errorMessage")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("status", object.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
+											else if (response.toString().contains("errorMessage")) {
+												JSONObject object = new JSONObject(response);
+												if (object.toString().contains("errorMessage")) {
+													hm.put("ban", data.getBan());
+													hm.put("status", object.toString());
+													System.out.println(hm.get("ban"));
+													System.out.println(hm.get("status"));
+													header = sheet.createRow(temp);
+													header.createCell(0).setCellValue(hm.get("ban"));
+													header.createCell(1).setCellValue(hm.get("status"));
+													hm.clear();
+													temp = ++temp;
+												}
 
-                               } else if (response.toString().contains("Service not available")) {
-                                      if (response.toString().contains("Service not available")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("subscriber", data.getSubscriber());
-                                             hm.put("status", response.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             header.createCell(2).setCellValue(hm.get("subscriber"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
-                               }
+											} else if (response.toString().contains("Service not available")) {
+												if (response.toString().contains("Service not available")) {
+													hm.put("ban", data.getBan());
+													hm.put("subscriber", data.getSubscriber());
+													hm.put("status", response.toString());
+													System.out.println(hm.get("ban"));
+													System.out.println(hm.get("status"));
+													header = sheet.createRow(temp);
+													header.createCell(0).setCellValue(hm.get("ban"));
+													header.createCell(1).setCellValue(hm.get("status"));
+													header.createCell(2).setCellValue(hm.get("subscriber"));
+													hm.clear();
+													temp = ++temp;
+												}
+											}
 
-                        } catch (Exception E) {
-                               E.printStackTrace();
-                        }
-                        System.out.println(service.getRequiredFlags().size());
-                        for (int i = 0; i < service.getRequiredFlags().size(); i++) {
+										} catch (Exception E) {
+											E.printStackTrace();
+										}
+										System.out.println(service.getRequiredFlags().size());
+										for (int i = 0; i < service.getRequiredFlags().size(); i++) {
 
-                               System.out.println(service.getRequiredFlags().get(i) + ":"
-                                             + getJsonValue(response, service.getRequiredFlags().get(i)));
-                               flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
+											System.out.println(service.getRequiredFlags().get(i) + ":"
+													+ getJsonValue(response, service.getRequiredFlags().get(i)));
+											flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
 
-                        }
-                        System.out.println("Validation completed for " + service.getName());
-                 }
+										}
+										System.out.println("Validation completed for " + service.getName());
+					}
 					if (service.getName().equalsIgnoreCase("payment-eligibility-modify")) {
-                        while (futurepaymentsIterator.hasNext()) {
-                               TestData Future_Payments = futurepaymentsIterator.next();
+						while (futurepaymentsIterator.hasNext()) {
+							TestData Future_Payments = futurepaymentsIterator.next();
 
-                               ArrayList<String> hs = new ArrayList<>();
-                               String headersList[] = { "eligibilityInd" };
-                               for (String hl : headersList) {
-                                      hs.add(hl);
+							ArrayList<String> hs = new ArrayList<>();
+							String headersList[] = { "eligibilityInd" };
+							for (String hl : headersList) {
+								hs.add(hl);
 
-                               }
-                               client = new HttpClient();
-                               al.clear();
-                               if (temp == 1) {
-                                      sheet = workbook.createSheet("payment-eligibility-modify");
-                               }
-                               String updatedUrl = service.getURL().contains("$BAN")
-                                             ? service.getURL().replace("$BAN", Future_Payments.getBan())
-                                             : service.getURL();
-                               /*
-                               * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
-                               * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
-                               * service.getURL();
-                               */
-                               PostMethod method = new PostMethod(updatedUrl);
+							}
+							client = new HttpClient();
+							al.clear();
+							if (temp == 1) {
+								sheet = workbook.createSheet("payment-eligibility-modify");
+							}
+							String updatedUrl = service.getURL().contains("$BAN")
+									? service.getURL().replace("$BAN", Future_Payments.getBan())
+											: service.getURL();
+									/*
+									 * updatedUrl = service.getURL().contains("$SUBSCRIBER") ?
+									 * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) :
+									 * service.getURL();
+									 */
+									PostMethod method = new PostMethod(updatedUrl);
 
-                               // method.setRequestHeader("accountId", data.getBan());
-                               // method.setRequestHeader("sm_user", data.getSmUser());
-                               method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                               method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                               method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                               method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                               method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-                               method.setRequestHeader("consumerId", "Web");
-                               method.setRequestHeader("conversationId", "123");
+									// method.setRequestHeader("accountId", data.getBan());
+									// method.setRequestHeader("sm_user", data.getSmUser());
+									method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+									method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+									method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+									method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+									method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+									method.setRequestHeader("consumerId", "Web");
+									method.setRequestHeader("conversationId", "123");
 
-                               String RequestBody = service.getRequestBody().replace("$VoucherNumber",
-                                             Future_Payments.getVoucherNumber());
+									String RequestBody = service.getRequestBody().replace("$VoucherNumber",
+											Future_Payments.getVoucherNumber());
 
-                               StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json",
-                                             "UTF-8");
-                               method.setRequestEntity(request);
-                               int statusCode = client.executeMethod(method);
+									StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json",
+											"UTF-8");
+									method.setRequestEntity(request);
+									int statusCode = client.executeMethod(method);
 
-                               if (statusCode != HttpStatus.SC_CREATED) {
-                                      System.err.println("Method failed: " + method.getStatusLine());
-                               }
-                               String response = method.getResponseBodyAsString();
-                               System.out.println("Response is " + response);
-                               boolean b1 = response.startsWith("{");
-                               try {
-                                      if (b1 && response.contains("errorMessage")) {
-                                             hs.add("ban");
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", Future_Payments.getBan());
-                                                    }
-                                             }
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+									if (statusCode != HttpStatus.SC_CREATED) {
+										System.err.println("Method failed: " + method.getStatusLine());
+									}
+									String response = method.getResponseBodyAsString();
+									System.out.println("Response is " + response);
+									boolean b1 = response.startsWith("{");
+									try {
+										if (b1 && response.contains("errorMessage")) {
+											hs.add("ban");
+											for (String headerList : hs) {
+												if (headerList.contains("ban")) {
+													hm.put("ban", Future_Payments.getBan());
+												}
+											}
+											if (temp == 1) {
+												header = sheet.createRow(0);
+												System.out.println("headers list is size is" + hs.size());
+												for (int k = 0; k < hs.size(); k++) {
+													header.createCell(k).setCellValue(hs.get(k));
+												}
+											}
+											header = sheet.createRow(temp);
+											for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                             }
-                                             header.createCell(hs.size()).setCellValue(response);
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                             hs.remove("subscriber");
-                                      } else if (b1 && !response.contains("errorMessage")) {
-                                             {
+												header.createCell(k).setCellValue(hm.get(hs.get(k)));
+											}
+											header.createCell(hs.size()).setCellValue(response);
+											hm.clear();
+											temp = ++temp;
+											hs.remove("ban");
+											hs.remove("subscriber");
+										} else if (b1 && !response.contains("errorMessage")) {
+											{
 
-                                                    JSONObject object = new JSONObject(response);
+												JSONObject object = new JSONObject(response);
 
-                                                    JSONObject object2 = object
-                                                                 .getJSONObject("checkAccountPaymentEligibilityResponse");
+												JSONObject object2 = object
+														.getJSONObject("checkAccountPaymentEligibilityResponse");
 
-                                                    JSONObject object1 = object2.getJSONObject("paEligibilityInfo");
+												JSONObject object1 = object2.getJSONObject("paEligibilityInfo");
 
-                                                    al.clear();
-                                                    al.addAll(object1.keySet());
-                                                    hs.add("ban");
+												al.clear();
+												al.addAll(object1.keySet());
+												hs.add("ban");
 
-                                                    for (String headerList : hs) {
-                                                          if (headerList.contains("ban")) {
-                                                                 hm.put("ban", Future_Payments.getBan());
-                                                          }
+												for (String headerList : hs) {
+													if (headerList.contains("ban")) {
+														hm.put("ban", Future_Payments.getBan());
+													}
 
-                                                          else {
-                                                                 try {
+													else {
+														try {
 
-                                                                        System.out.println(String.valueOf(object1.get(headerList)));
-                                                                        hm.put(headerList, String.valueOf(object1.get(headerList)));
-                                                                 } catch (Exception e) {
-                                                                        hm.put(headerList, "");
-                                                                 }
-                                                          }
-                                                    }
+															System.out.println(String.valueOf(object1.get(headerList)));
+															hm.put(headerList, String.valueOf(object1.get(headerList)));
+														} catch (Exception e) {
+															hm.put(headerList, "");
+														}
+													}
+												}
 
-                                                    if (temp == 1) {
-                                                          header = sheet.createRow(0);
+												if (temp == 1) {
+													header = sheet.createRow(0);
 
-                                                           System.out.println("headers list is size is" + hs.size());
-                                                          for (int k = 0; k < hs.size(); k++) {
-                                                                 header.createCell(k).setCellValue(hs.get(k));
-                                                          }
-                                                    }
-                                                    header = sheet.createRow(temp);
-                                                    for (int k = 0; k < hs.size(); k++) {
+													System.out.println("headers list is size is" + hs.size());
+													for (int k = 0; k < hs.size(); k++) {
+														header.createCell(k).setCellValue(hs.get(k));
+													}
+												}
+												header = sheet.createRow(temp);
+												for (int k = 0; k < hs.size(); k++) {
 
-                                                           header.createCell(k).setCellValue(hm.get(hs.get(k)));
+													header.createCell(k).setCellValue(hm.get(hs.get(k)));
 
-                                                    }
-                                                    hm.clear();
-                                                    temp = ++temp;
-                                                    hs.remove("ban");
-                                             }
-                                      }
+												}
+												hm.clear();
+												temp = ++temp;
+												hs.remove("ban");
+											}
+										}
 
-                                      else if (response.toString().contains("errorMessage")) {
-                                             JSONObject object = new JSONObject(response);
-                                             if (object.toString().contains("errorMessage")) {
-                                                    hm.put("ban", Future_Payments.getBan());
-                                                    hm.put("status", object.toString());
-                                                    System.out.println(hm.get("ban"));
-                                                    System.out.println(hm.get("status"));
-                                                    header = sheet.createRow(temp);
-                                                    header.createCell(0).setCellValue(hm.get("ban"));
-                                                    header.createCell(1).setCellValue(hm.get("status"));
-                                                    hm.clear();
-                                                    temp = ++temp;
-                                             }
+										else if (response.toString().contains("errorMessage")) {
+											JSONObject object = new JSONObject(response);
+											if (object.toString().contains("errorMessage")) {
+												hm.put("ban", Future_Payments.getBan());
+												hm.put("status", object.toString());
+												System.out.println(hm.get("ban"));
+												System.out.println(hm.get("status"));
+												header = sheet.createRow(temp);
+												header.createCell(0).setCellValue(hm.get("ban"));
+												header.createCell(1).setCellValue(hm.get("status"));
+												hm.clear();
+												temp = ++temp;
+											}
 
-                                      } else if (response.toString().contains("Service not available")) {
+										} else if (response.toString().contains("Service not available")) {
 
-                                             hm.put("ban", Future_Payments.getBan());
-                                             hm.put("status", response.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
+											hm.put("ban", Future_Payments.getBan());
+											hm.put("status", response.toString());
+											System.out.println(hm.get("ban"));
+											System.out.println(hm.get("status"));
+											header = sheet.createRow(temp);
+											header.createCell(0).setCellValue(hm.get("ban"));
+											header.createCell(1).setCellValue(hm.get("status"));
+											hm.clear();
+											temp = ++temp;
 
-                                      }
+										}
 
-                               } catch (Exception E) {
-                                      E.printStackTrace();
-                               }
+									} catch (Exception E) {
+										E.printStackTrace();
+									}
 
-                               System.out.println("Validation completed for " + service.getName());
-                        }
-                 }
+									System.out.println("Validation completed for " + service.getName());
+						}
+					}
 
-                 if (service.getURL().contains("subscriberbasicinfo")) {
-                        ArrayList<String> hs = new ArrayList<>();
-                        String headersList[] = { "basicInfo", "detailInfo" };
-                        for (String hl : headersList) {
-                               hs.add(hl);
+					if (service.getURL().contains("subscriberbasicinfo")) {
+						ArrayList<String> hs = new ArrayList<>();
+						String headersList[] = { "basicInfo", "detailInfo" };
+						for (String hl : headersList) {
+							hs.add(hl);
 
-                        }
-                        client = new HttpClient();
-                        al.clear();
-                        if (temp == 1) {
-                               sheet = workbook.createSheet("subscriber_basicinfo");
-                        }
-                        String updatedUrl = service.getURL();
-                        /*
-                        * .contains("$BAN") ? service.getURL().replace("$BAN", data.getBan()) :
-                        * service.getURL(); updatedUrl = updatedUrl.contains("$SUBSCRIBER") ?
-                        * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) : updatedUrl;
-                        */
-                        PostMethod method = new PostMethod(updatedUrl);
+						}
+						client = new HttpClient();
+						al.clear();
+						if (temp == 1) {
+							sheet = workbook.createSheet("subscriber_basicinfo");
+						}
+						String updatedUrl = service.getURL();
+						/*
+						 * .contains("$BAN") ? service.getURL().replace("$BAN", data.getBan()) :
+						 * service.getURL(); updatedUrl = updatedUrl.contains("$SUBSCRIBER") ?
+						 * updatedUrl.replaceAll("$SUBSCRIBER", data.getSubscriber()) : updatedUrl;
+						 */
+						PostMethod method = new PostMethod(updatedUrl);
 
-                        // method.setRequestHeader("accountId", data.getBan());
-                        // method.setRequestHeader("sm_user", data.getSmUser());
-                        method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
-                        method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
-                        method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
-                        method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
-                        method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
-                        method.setRequestHeader("consumerId", "WEBCHAT");
-                        method.setRequestHeader("conversationId", "123");
+						// method.setRequestHeader("accountId", data.getBan());
+						// method.setRequestHeader("sm_user", data.getSmUser());
+						method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+						method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+						method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+						method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+						method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+						method.setRequestHeader("consumerId", "WEBCHAT");
+						method.setRequestHeader("conversationId", "123");
 
-                        String RequestBody = service.getRequestBody().replace("$PTN", data.getPtn());
+						String RequestBody = service.getRequestBody().replace("$PTN", data.getPtn());
 
-                        System.out.println(RequestBody);
+						System.out.println(RequestBody);
 
-                        StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
-                        method.setRequestEntity(request);
-                        int statusCode = client.executeMethod(method);
+						StringRequestEntity request = new StringRequestEntity(RequestBody, "application/json", "UTF-8");
+						method.setRequestEntity(request);
+						int statusCode = client.executeMethod(method);
 
-                        if (statusCode != HttpStatus.SC_OK) {
-                               System.err.println("Method failed: " + method.getStatusLine());
-                        }
-                        String response = method.getResponseBodyAsString();
-                        System.out.println("Response is " + response);
-                        boolean b1 = response.startsWith("{");
-                        try {
-                               if (b1 && response.contains("errorMessage")) {
-                                      hs.add("ban");
-                                      for (String headerList : hs) {
-                                             if (headerList.contains("ban")) {
-                                                    hm.put("ban", data.getBan());
-                                             }
-                                      }
-                                      if (temp == 1) {
-                                             header = sheet.createRow(0);
-                                             System.out.println("headers list is size is" + hs.size());
-                                             for (int k = 0; k < hs.size(); k++) {
-                                                    header.createCell(k).setCellValue(hs.get(k));
-                                             }
-                                      }
-                                      header = sheet.createRow(temp);
-                                      for (int k = 0; k < hs.size(); k++) {
+						if (statusCode != HttpStatus.SC_OK) {
+							System.err.println("Method failed: " + method.getStatusLine());
+						}
+						String response = method.getResponseBodyAsString();
+						System.out.println("Response is " + response);
+						boolean b1 = response.startsWith("{");
+						try {
+							if (b1 && response.contains("errorMessage")) {
+								hs.add("ban");
+								for (String headerList : hs) {
+									if (headerList.contains("ban")) {
+										hm.put("ban", data.getBan());
+									}
+								}
+								if (temp == 1) {
+									header = sheet.createRow(0);
+									System.out.println("headers list is size is" + hs.size());
+									for (int k = 0; k < hs.size(); k++) {
+										header.createCell(k).setCellValue(hs.get(k));
+									}
+								}
+								header = sheet.createRow(temp);
+								for (int k = 0; k < hs.size(); k++) {
 
-                                             header.createCell(k).setCellValue(hm.get(hs.get(k)));
-                                      }
-                                      header.createCell(hs.size()).setCellValue(response);
-                                      hm.clear();
-                                      temp = ++temp;
-                                      hs.remove("ban");
-                                      hs.remove("subscriber");
-                               } else if (b1 && !response.contains("errorMessage")) {
-                                      {
+									header.createCell(k).setCellValue(hm.get(hs.get(k)));
+								}
+								header.createCell(hs.size()).setCellValue(response);
+								hm.clear();
+								temp = ++temp;
+								hs.remove("ban");
+								hs.remove("subscriber");
+							} else if (b1 && !response.contains("errorMessage")) {
+								{
 
-                                             JSONObject object = new JSONObject(response);
+									JSONObject object = new JSONObject(response);
 
-                                             JSONObject object1 = object.getJSONObject("querySubscriberBasicInfoResponse");
+									JSONObject object1 = object.getJSONObject("querySubscriberBasicInfoResponse");
 
-                                             // JSONObject object1= object2.getJSONObject("paEligibilityInfo");
+									// JSONObject object1= object2.getJSONObject("paEligibilityInfo");
 
-                                             al.clear();
-                                             al.addAll(object1.keySet());
-                                             hs.add("ban");
+									al.clear();
+									al.addAll(object1.keySet());
+									hs.add("ban");
 
-                                             for (String headerList : hs) {
-                                                    if (headerList.contains("ban")) {
-                                                          hm.put("ban", data.getBan());
-                                                    }
+									for (String headerList : hs) {
+										if (headerList.contains("ban")) {
+											hm.put("ban", data.getBan());
+										}
 
-                                                    else {
-                                                          try {
+										else {
+											try {
 
-                                                                 System.out.println(String.valueOf(object1.get(headerList)));
-                                                                 hm.put(headerList, String.valueOf(object1.get(headerList)));
-                                                          } catch (Exception e) {
-                                                                 hm.put(headerList, "");
-                                                          }
-                                                    }
-                                             }
+												System.out.println(String.valueOf(object1.get(headerList)));
+												hm.put(headerList, String.valueOf(object1.get(headerList)));
+											} catch (Exception e) {
+												hm.put(headerList, "");
+											}
+										}
+									}
 
-                                             if (temp == 1) {
-                                                    header = sheet.createRow(0);
+									if (temp == 1) {
+										header = sheet.createRow(0);
 
-                                                    System.out.println("headers list is size is" + hs.size());
-                                                    for (int k = 0; k < hs.size(); k++) {
-                                                           header.createCell(k).setCellValue(hs.get(k));
-                                                    }
-                                             }
-                                             header = sheet.createRow(temp);
-                                             for (int k = 0; k < hs.size(); k++) {
+										System.out.println("headers list is size is" + hs.size());
+										for (int k = 0; k < hs.size(); k++) {
+											header.createCell(k).setCellValue(hs.get(k));
+										}
+									}
+									header = sheet.createRow(temp);
+									for (int k = 0; k < hs.size(); k++) {
 
-                                                    header.createCell(k).setCellValue(hm.get(hs.get(k)));
+										header.createCell(k).setCellValue(hm.get(hs.get(k)));
 
-                                             }
-                                             hm.clear();
-                                             temp = ++temp;
-                                             hs.remove("ban");
-                                      }
-                               }
+									}
+									hm.clear();
+									temp = ++temp;
+									hs.remove("ban");
+								}
+							}
 
-                               else if (response.toString().contains("errorMessage")) {
-                                      JSONObject object = new JSONObject(response);
-                                      if (object.toString().contains("errorMessage")) {
-                                             hm.put("ban", data.getBan());
-                                             hm.put("status", object.toString());
-                                             System.out.println(hm.get("ban"));
-                                             System.out.println(hm.get("status"));
-                                             header = sheet.createRow(temp);
-                                             header.createCell(0).setCellValue(hm.get("ban"));
-                                             header.createCell(1).setCellValue(hm.get("status"));
-                                             hm.clear();
-                                             temp = ++temp;
-                                      }
+							else if (response.toString().contains("errorMessage")) {
+								JSONObject object = new JSONObject(response);
+								if (object.toString().contains("errorMessage")) {
+									hm.put("ban", data.getBan());
+									hm.put("status", object.toString());
+									System.out.println(hm.get("ban"));
+									System.out.println(hm.get("status"));
+									header = sheet.createRow(temp);
+									header.createCell(0).setCellValue(hm.get("ban"));
+									header.createCell(1).setCellValue(hm.get("status"));
+									hm.clear();
+									temp = ++temp;
+								}
 
-                               } else if (response.toString().contains("Service not available")) {
+							} else if (response.toString().contains("Service not available")) {
 
-                                      hm.put("ban", data.getBan());
-                                      hm.put("status", response.toString());
-                                      System.out.println(hm.get("ban"));
-                                      System.out.println(hm.get("status"));
-                                      header = sheet.createRow(temp);
-                                      header.createCell(0).setCellValue(hm.get("ban"));
-                                      header.createCell(1).setCellValue(hm.get("status"));
-                                      hm.clear();
-                                      temp = ++temp;
+								hm.put("ban", data.getBan());
+								hm.put("status", response.toString());
+								System.out.println(hm.get("ban"));
+								System.out.println(hm.get("status"));
+								header = sheet.createRow(temp);
+								header.createCell(0).setCellValue(hm.get("ban"));
+								header.createCell(1).setCellValue(hm.get("status"));
+								hm.clear();
+								temp = ++temp;
 
-                               }
+							}
 
-                        } catch (Exception E) {
-                               E.printStackTrace();
-                        }
+						} catch (Exception E) {
+							E.printStackTrace();
+						}
 
-                        System.out.println("Validation completed for " + service.getName());
-                 }
+						System.out.println("Validation completed for " + service.getName());
+					}
 
 					if(service.getURL().contains("/v1/flows")) {
 						System.out.println("For subscriber " + data.getSubscriber());
@@ -4119,7 +4124,404 @@ public class UtilityService {
 
 										}
 										System.out.println("Validation completed for " + service.getName());		}
-										if(service.getURL().contains("subscriptions") && service.getURL().contains("upgrade-eligibility")) {
+					if(service.getURL().contains("products/v1/services")) {
+						System.out.println("For subscriber " + data.getSubscriber());
+						ArrayList<String> hs=new ArrayList<>();
+						String headersList[]= {"serviceCategoryID","singleSelect","mandatory","topSelling","serviceSOCSKU","serviceSKU","socBasePrice", "socFinalPrice","oneTime","preselect","requiresTnCOnSelection","requiresWarningOnRemoval","requiresWarningOnSelection","allowUserToEdit","doNotAllowUserToAdd","devicePromotable","serviceType","prohibitiveSOCs","requiredSOCs","messagingAddOnStatus","dependingSOCs","lowerRankedExistingConflictingSOCs","tiIndicator","serviceType","serviceName","serviceEffectiveDate","serviceExpirationDate","requiresWarningOnRemoval","socPrice","systemRemoved","userRemovable","oneTime","dependingSOCs","prohibitiveSOCs","requiredSOCs","higherRankedNewConflictingSOCs","tiIndicator","existingAddonMACs"};
+						String serviceCategoryDTO[]= {"serviceCategoryID","singleSelect","mandatory","topSelling"};
+						String newServices[]= {"serviceSOCSKU","serviceSKU","socBasePrice", "socFinalPrice","oneTime","preselect","requiresTnCOnSelection","requiresWarningOnRemoval","requiresWarningOnSelection","allowUserToEdit","doNotAllowUserToAdd","devicePromotable","serviceType","prohibitiveSOCs","requiredSOCs","messagingAddOnStatus","dependingSOCs","lowerRankedExistingConflictingSOCs","tiIndicator"};
+						String existingServices[]= {"serviceSOCSKU","serviceSKU","serviceType","serviceName","serviceEffectiveDate","serviceExpirationDate","requiresWarningOnRemoval","socPrice","systemRemoved","userRemovable","oneTime","dependingSOCs","prohibitiveSOCs","requiredSOCs","higherRankedNewConflictingSOCs","tiIndicator","existingAddonMACs"}; 
+						for(String hl:headersList) {
+							hs.add(hl);
+
+						}
+						System.out.println("headers size is"+hs.size());
+						client = new HttpClient();
+						al.clear();
+						if(temp==1) {
+							sheet=workbook.createSheet("v1-services");
+						}
+						String updatedUrl = service.getURL().contains("$BAN")
+								? service.getURL().replace("$BAN", data.getBan()) : service.getURL();
+								updatedUrl = updatedUrl.contains("$SUBSCRIBER")
+										? updatedUrl.replace("$SUBSCRIBER", data.getSubscriber()) : service.getURL();
+										GetMethod method = new GetMethod(updatedUrl);
+										method.setRequestHeader("accountId", data.getBan());					
+										method.setRequestHeader("sm_user", data.getSmUser());
+										method.setRequestHeader("applicationId", AIVAConstants.APPLICATION_ID);
+										method.setRequestHeader("applicationUserId", AIVAConstants.APPLICATION_USR_ID);
+										method.setRequestHeader("enterpriseMessageId", AIVAConstants.ENTERPRISE_MSG_ID);
+										method.setRequestHeader("messageId", AIVAConstants.MESSAGE_ID);
+										method.setRequestHeader("messageDateTimeStamp", AIVAConstants.MESSAGE_TIMESTAMP);
+
+										// Execute the method.
+										int statusCode = client.executeMethod(method);
+
+										if (statusCode != HttpStatus.SC_OK) {
+											System.err.println("Method failed: " + method.getStatusLine());
+										}
+										String response = method.getResponseBodyAsString();	
+										System.out.println("Response is "+response);
+										boolean b=response.startsWith("[");
+										boolean b1=response.startsWith("{");
+										System.out.println(b);
+										try {
+											if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()>0)
+											{
+												JSONArray array = new JSONArray(response);
+												System.out.println("No of subscribers are in response is "+array.length());
+
+												for(int i=0;i<array.length();i++) {
+													JSONObject  object=array.getJSONObject(i);
+													System.out.println(object.keySet());
+													hs.add("ban");
+													for(String headerList:hs) {
+														if(headerList.contains("ban")) 
+														{
+															hm.put("ban", data.getBan());
+														}
+														else {
+															System.out.println(headerList);
+															try {
+																hm.put(headerList, String.valueOf(object.get(headerList)));
+															}catch(Exception E) {
+																hm.put(headerList, "");
+															}
+														}
+
+													}
+													if (temp==1) {
+
+														header=sheet.createRow(0);
+														System.out.println("headers list is size is" + hs.size());
+														for (int k = 0; k < hs.size(); k++) {
+															header.createCell(k).setCellValue(hs.get(k));
+														}
+													}
+													header=sheet.createRow(temp);
+													for(int k=0;k<hs.size();k++) {
+
+														header.createCell(k).setCellValue(hm.get(hs.get(k)));
+													}	
+													hm.clear();
+													temp=++temp;
+													if(temp>1) {
+														hs.remove("ban");
+													}
+
+												}	
+
+											}
+											else if(b==true && !response.contains("errorMessage") && new JSONArray(response).length()==0)
+											{
+												JSONArray array = new JSONArray(response);
+												System.out.println("No of subscribers are in response is "+array.length());
+												hs.add("ban");
+												for(String headerList:hs) {
+													if(headerList.contains("ban")) 
+													{
+														hm.put("ban", data.getBan());
+
+													}
+													else {
+														System.out.println(headerList);
+														try {
+															hm.put(headerList, String.valueOf(""));
+														}catch(Exception E) {
+															hm.put(headerList, "");
+														}
+													}
+
+												}
+												if (temp==1) {
+
+													header=sheet.createRow(0);
+													System.out.println("headers list is size is" + hs.size());
+													for (int k = 0; k < hs.size(); k++) {
+														header.createCell(k).setCellValue(hs.get(k));
+													}
+												}
+												header=sheet.createRow(temp);
+												for(int k=0;k<hs.size();k++) {
+
+													header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												}	
+												hm.clear();
+												temp=++temp;
+
+
+											}
+											else if (b1 && response.contains("errorMessage")) {
+												hs.add("ban");
+												hs.add("subscriber");
+												for(String headerList:hs) {
+													if(headerList.contains("ban")) 
+													{
+														hm.put("ban", data.getBan());
+													}
+													if(headerList.contains("subscriber")) 
+													{
+														System.out.println(data.getSubscriber()+" ,"+data.getBan());
+														hm.put("subscriber", data.getSubscriber());
+													}
+												}
+												if (temp==1) {
+													header=sheet.createRow(0);
+													System.out.println("headers list is size is" + hs.size());
+													for (int k = 0; k < hs.size(); k++) {
+														header.createCell(k).setCellValue(hs.get(k));
+													}
+												}
+												header=sheet.createRow(temp);
+												for(int k=0;k<hs.size();k++) {
+
+													header.createCell(k).setCellValue(hm.get(hs.get(k)));
+												}	
+												header.createCell(hs.size()).setCellValue(response);
+												hm.clear();
+												temp=++temp;
+												hs.remove("ban");
+												hs.remove("subscriber");
+											}
+											else if (b1 && !response.contains("errorMessage")) {
+												{
+													System.out.println(response);
+													JSONObject object = new JSONObject(response);
+													JSONArray arr=object.getJSONArray("serviceLineDetails");
+													JSONArray newServiceCategoriesArray=arr.getJSONObject(0).getJSONArray("newServiceCategories");
+													System.out.println(newServiceCategoriesArray.length());
+													
+													if(newServiceCategoriesArray.length()>0) {
+														for(int i=0;i<newServiceCategoriesArray.length();i++) {
+															JSONObject object1=newServiceCategoriesArray.getJSONObject(i);
+															JSONObject object2=object1.getJSONObject("serviceCategoryDTO");
+															System.out.println(object2.length());
+															JSONArray newServiceCategories=object1.getJSONArray("newServices");
+															System.out.println(newServiceCategories.length());
+															for(int j=0;j<newServiceCategories.length();j++) {
+																
+																for(int k=0;k<newServices.length;k++) {
+																try {
+																	System.out.println(String.valueOf(newServiceCategories.getJSONObject(j).get(newServices[k])));
+																	hm.put(newServices[k], String.valueOf(newServiceCategories.getJSONObject(j).get(newServices[k])));
+																} catch (Exception e) {
+																	hm.put(newServices[k], "");
+																}																
+																
+																}
+																System.out.println(object2.length());
+																for(int l=0;l<object2.length();l++) {
+																	try {
+																		System.out.println(String.valueOf(object2.get(serviceCategoryDTO[l])));
+																		hm.put(serviceCategoryDTO[l], String.valueOf(object2.get(serviceCategoryDTO[l])));
+																	} catch (Exception e) {
+																		hm.put(serviceCategoryDTO[l], "");
+																	}
+																}
+																hs.add("ban");
+																hs.add("subscriber");
+																hs.add("service");
+																for(String headerList:hs) {
+																	if(headerList.contains("ban")) 
+																	{
+																		hm.put("ban", data.getBan());
+																	}
+																	else if(headerList.contains("subscriber")) 
+																	{
+																		System.out.println(data.getSubscriber()+" ,"+data.getBan());
+																		hm.put("subscriber", data.getSubscriber());
+																	}
+																	else if(headerList.contains("service")) 
+																	{
+																		hm.put("service", "new Services");
+																	}
+																	
+
+																}
+																if (temp==1) {
+																	header=sheet.createRow(0);
+																	System.out.println("headers list is size is" + hs.size());
+																	for (int l = 0; l < hs.size(); l++) {
+																		header.createCell(l).setCellValue(hs.get(l));
+																	}
+																}
+																header=sheet.createRow(temp);
+																for(int l=0;l<hs.size();l++) {
+
+																	header.createCell(l).setCellValue(hm.get(hs.get(l)));
+																}	
+																hm.clear();
+																temp=++temp;
+																hs.remove("subscriber");
+																hs.remove("service");
+																hs.remove("ban");
+															}
+															
+														}
+													}
+													JSONArray existingServiceCategoriesArray=arr.getJSONObject(0).getJSONArray("existingServiceCategories");
+													System.out.println(existingServiceCategoriesArray.length());
+													
+													if(existingServiceCategoriesArray.length()>0) {
+														for(int i=0;i<existingServiceCategoriesArray.length();i++) {
+															JSONObject object1=existingServiceCategoriesArray.getJSONObject(i);
+															JSONObject object2=object1.getJSONObject("serviceCategoryDTO");
+															System.out.println(object2.length());
+															JSONArray existingServicesArray=object1.getJSONArray("existingServices");
+															System.out.println(existingServicesArray.length());
+															for(int j=0;j<existingServicesArray.length();j++) {
+																
+																for(int k=0;k<existingServices.length;k++) {
+																	try {
+																		System.out.println(String.valueOf(existingServicesArray.getJSONObject(j).get(existingServices[k])));
+																		hm.put(existingServices[k], String.valueOf(existingServicesArray.getJSONObject(j).get(existingServices[k])));
+																	} catch (Exception e) {
+																		hm.put(existingServices[k], "");
+																	}																
+																	
+																}
+																System.out.println(object2.length());
+																for(int l=0;l<object2.length();l++) {
+																	try {
+																		System.out.println(String.valueOf(object2.get(serviceCategoryDTO[l])));
+																		hm.put(serviceCategoryDTO[l], String.valueOf(object2.get(serviceCategoryDTO[l])));
+																	} catch (Exception e) {
+																		hm.put(serviceCategoryDTO[l], "");
+																	}
+																}
+																hs.add("ban");
+																hs.add("subscriber");
+																hs.add("service");
+																for(String headerList:hs) {
+																	if(headerList.contains("ban")) 
+																	{
+																		hm.put("ban", data.getBan());
+																	}
+																	else if(headerList.contains("subscriber")) 
+																	{
+																		System.out.println(data.getSubscriber()+" ,"+data.getBan());
+																		hm.put("subscriber", data.getSubscriber());
+																	}
+																	else if(headerList.contains("service")) 
+																	{
+																		hm.put("service", "existing Services");
+																	}
+																	
+																	
+																}
+																if (temp==1) {
+																	header=sheet.createRow(0);
+																	System.out.println("headers list is size is" + hs.size());
+																	for (int l = 0; l < hs.size(); l++) {
+																		header.createCell(l).setCellValue(hs.get(l));
+																	}
+																}
+																header=sheet.createRow(temp);
+																for(int l=0;l<hs.size();l++) {
+																	
+																	header.createCell(l).setCellValue(hm.get(hs.get(l)));
+																}	
+																hm.clear();
+																temp=++temp;
+																hs.remove("subscriber");
+																hs.remove("service");
+																hs.remove("ban");
+															}
+															
+														}
+													}
+													if(false) {
+//														if(array.length()==0) {
+
+														hs.add("ban");
+														hs.add("subscriber");
+														for(String headerList:hs) {
+															if(headerList.contains("ban")) 
+															{
+																hm.put("ban", data.getBan());
+															}
+															else if(headerList.contains("subscriber")) 
+															{
+																System.out.println(data.getSubscriber()+" ,"+data.getBan());
+																hm.put("subscriber", data.getSubscriber());
+															}
+															else {
+																System.out.println(headerList);
+																try {
+																	System.out.println(String.valueOf(""));
+																	hm.put(headerList, String.valueOf(""));
+																} catch (Exception e) {
+																	hm.put(headerList, "");
+																}
+															}
+
+														}
+														System.out.println(path);
+														if (temp==1) {
+															header=sheet.createRow(0);
+															System.out.println("headers list is size is" + hs.size());
+															for (int k = 0; k < hs.size(); k++) {
+																header.createCell(k).setCellValue(hs.get(k));
+															}
+														}
+														header=sheet.createRow(temp);
+														for(int k=0;k<hs.size();k++) {
+
+															header.createCell(k).setCellValue(hm.get(hs.get(k)));
+														}	
+														hm.clear();
+														temp=++temp;
+														hs.remove("ban");
+														hs.remove("subscriber");
+													}
+
+												}
+											}
+											else if(response.toString().contains("errorMessage"))
+											{
+												JSONObject  object=new JSONObject(response);
+												if(object.toString().contains("errorMessage")) {
+													hm.put("ban", data.getBan());
+													hm.put("status", object.toString());
+													System.out.println(hm.get("ban")); 
+													System.out.println(hm.get("status"));											
+													header=sheet.createRow(temp);
+													header.createCell(0).setCellValue(hm.get("ban"));
+													header.createCell(1).setCellValue(hm.get("status"));
+													hm.clear();
+													temp=++temp;
+												}
+
+											}
+											else if(response.toString().contains("Service not available")){
+												if(response.toString().contains("Service not available")) {
+													hm.put("ban", data.getBan());
+													hm.put("status", response.toString());
+													System.out.println(hm.get("ban")); 
+													System.out.println(hm.get("status"));											
+													header=sheet.createRow(temp);
+													header.createCell(0).setCellValue(hm.get("ban"));
+													header.createCell(1).setCellValue(hm.get("status"));
+													hm.clear();
+													temp=++temp;
+												}
+											}
+
+										}
+										catch(Exception E)
+										{
+											E.printStackTrace();
+										}
+										System.out.println(service.getRequiredFlags().size());
+										for (int i = 0; i < service.getRequiredFlags().size(); i++) {
+
+											System.out.println(service.getRequiredFlags().get(i) + ":"
+													+ getJsonValue(response, service.getRequiredFlags().get(i)));
+											flagValues.add(getJsonValue(response, service.getRequiredFlags().get(i)));
+
+										}
+										System.out.println("Validation completed for " + service.getName());		}
+					if(service.getURL().contains("subscriptions") && service.getURL().contains("upgrade-eligibility")) {
 						System.out.println("For subscriber " + data.getSubscriber());
 						ArrayList<String> hs=new ArrayList<>();
 						String headersList[]= {"eligible","lease","leaseEligibleDate","installmentBilling","installmentBillingEligibleDate","subsidy","subsidyEligibleDate","earlyUpgradeEligible","contractType","turnInOrGiveBackEligible","turnInOrGiveBackAmount","buyoutAmount","hasMultipleContracts","jumpEligibleCustomer","jumpOnDemandEligibile","jump"};
