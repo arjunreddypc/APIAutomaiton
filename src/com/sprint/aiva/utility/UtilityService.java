@@ -4023,7 +4023,7 @@ public class UtilityService {
 					if(service.getURL().contains("subscriptions") && service.getURL().contains("contract")) {
 						System.out.println("For subscriber " + data.getSubscriber());
 						ArrayList<String> hs=new ArrayList<>();
-						String headersList[]= {"contractType","contractId","monthlyPayment","contractTermInMonths","canPayoffLease","durationInMonths","timeRemainingInMonths","purchaseOptionPrice","extendedMonthly","startDate","upfrontPayment","leaseSequenceNumber","flexLeaseInd","flexPurchasePreferenceInd","currentLeaseTermStatus","amtFromCustToPurchase","leaseUnbilledAmount","canSetPurchaseIntent","canSignIBPPO","canCancelIBPPO","itemId","itemName","ppoContractDetails","loanSequenceNumber","loanAmount","loanPaidAmount","payOffAmount","canPayoffLoan","flexLoanInd","bundledItemIds","bundledItemIds"};
+						String headersList[]= {"contractType","contractId","monthlyPayment","contractTermInMonths","canPayoffLease","durationInMonths","timeRemainingInMonths","purchaseOptionPrice","extendedMonthly","startDate","upfrontPayment","leaseSequenceNumber","flexLeaseInd","flexPurchasePreferenceInd","currentLeaseTermStatus","amtFromCustToPurchase","leaseUnbilledAmount","canSetPurchaseIntent","canSignIBPPO","canCancelIBPPO","itemId","itemName","ppoContractDetails","loanSequenceNumber","loanAmount","loanPaidAmount","payOffAmount","canPayoffLoan","flexLoanInd","bundledItemIds"};
 						for(String hl:headersList) {
 							hs.add(hl);
 
@@ -4518,6 +4518,7 @@ public class UtilityService {
 																hs.add("ban");
 																hs.add("subscriber");
 																hs.add("service");
+																hs.add("smUser");
 																for(String headerList:hs) {
 																	if(headerList.contains("ban")) 
 																	{
@@ -4527,6 +4528,11 @@ public class UtilityService {
 																	{
 																		System.out.println(data.getSubscriber()+" ,"+data.getBan());
 																		hm.put("subscriber", data.getSubscriber());
+																	}
+																	else if(headerList.contains("smUser")) 
+																	{
+																		System.out.println(data.getSmUser()+" ,"+data.getBan());
+																		hm.put("smUser", data.getSmUser());
 																	}
 																	else if(headerList.contains("service")) 
 																	{
@@ -4552,6 +4558,7 @@ public class UtilityService {
 																hs.remove("subscriber");
 																hs.remove("service");
 																hs.remove("ban");
+																hs.remove("smUser");
 															}
 															
 														}
@@ -4589,6 +4596,7 @@ public class UtilityService {
 																hs.add("ban");
 																hs.add("subscriber");
 																hs.add("service");
+																hs.add("smUser");
 																for(String headerList:hs) {
 																	if(headerList.contains("ban")) 
 																	{
@@ -4598,6 +4606,11 @@ public class UtilityService {
 																	{
 																		System.out.println(data.getSubscriber()+" ,"+data.getBan());
 																		hm.put("subscriber", data.getSubscriber());
+																	}
+																	else if(headerList.contains("smUser")) 
+																	{
+																		System.out.println(data.getSmUser()+" ,"+data.getBan());
+																		hm.put("smUser", data.getSmUser());
 																	}
 																	else if(headerList.contains("service")) 
 																	{
@@ -4623,6 +4636,7 @@ public class UtilityService {
 																hs.remove("subscriber");
 																hs.remove("service");
 																hs.remove("ban");
+																hs.remove("smUser");
 															}
 															
 														}
